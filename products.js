@@ -5,7 +5,7 @@ const products = [
         category: "Elektronik",
         name: "A3 Wireless Bluetooth Headset TWS",
         price: 26000,
-        image: "https://tmpfiles.org/dl/22603564/download.jpeg",
+        image: "/img/canva.jpg",
         detailLink: "https://www.nainshop.biz.id/details/tws.html",
         buyLink: "https://vt.tokopedia.com/t/ZSMBoyX2x/"
     },
