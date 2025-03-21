@@ -499,6 +499,10 @@ function renderProducts(productList) {
     productList.forEach(product => {
         const productElement = document.createElement('div');
         productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
+        
+        // Menghitung harga setelah potongan
+        const finalPrice = product.discount ? product.price - product.discount : product.price;
+        
         productElement.innerHTML = `
             <div class="relative">
                 <div class="product-image">
@@ -506,8 +510,16 @@ function renderProducts(productList) {
                 </div>
                 <div class="p-3">
                     <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
-                    <div class="flex items-baseline mb-2">
-                        <span class="text-pink-500 font-semibold text-base">Rp ${product.price.toLocaleString()}</span>
+                    <div class="flex flex-col mb-2">
+                        ${product.discount ? 
+                            `<span class="text-gray-500 text-xs line-through">Rp ${product.price.toLocaleString()}</span>
+                             <div class="flex items-center">
+                                <span class="text-pink-500 font-semibold text-base">Rp ${finalPrice.toLocaleString()}</span>
+                                <span class="text-xs text-green-600 ml-2">-Rp ${product.discount.toLocaleString()}</span>
+                             </div>` 
+                            : 
+                            `<span class="text-pink-500 font-semibold text-base">Rp ${finalPrice.toLocaleString()}</span>`
+                        }
                     </div>
                     <div class="flex items-center text-xs text-gray-500 mb-2">
                         <i class="ri-star-fill text-yellow-400 mr-1"></i>
@@ -516,17 +528,157 @@ function renderProducts(productList) {
                         <span>Terjual ${product.sold || Math.floor(Math.random() * 500) + 50}</span>
                     </div>
                     <div class="flex space-x-2">
-                        <a href="${product.detailLink}" target="_blank"
-                           class="flex-1 bg-gray-200 text-gray-700 text-sm rounded-lg py-2 mt-1 hover:bg-gray-300 transition-colors text-center">
+                        <a href="${product.detailLink}" class="flex-1 bg-gray-200 text-gray-700 text-sm rounded-lg py-2 mt-1 hover:bg-gray-300 transition-colors text-center">
                             Detail
                         </a>
+                        <button onclick="addToCart(${product.id})" 
+                            class="flex-1 bg-pink-500 text-white text-sm rounded-lg py-2 mt-1 hover:bg-pink-600 transition-colors">
+                            + Keranjang
+                        </button>
                     </div>
                 </div>
             </div>
         `;
         productGrid.appendChild(productElement);
     });
+}
+
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        // Check if product already exists in cart
+        const existingItemIndex = cart.findIndex(item => item.id === productId);
+        
+        // Menghitung harga setelah potongan
+        const finalPrice = product.discount ? product.price - product.discount : product.price;
+        
+        if (existingItemIndex >= 0) {
+            // Increase quantity if product already in cart
+            cart[existingItemIndex].quantity += 1;
+        } else {
+            // Add new product to cart
+            cart.push({ 
+                id: product.id,
+                name: product.name, 
+                originalPrice: product.price,
+                discount: product.discount || 0,
+                price: finalPrice,
+                link: product.buyLink,
+                quantity: 1
+            });
         }
+        
+        totalAmount += finalPrice;
+        updateCartUI();
+        saveCartToStorage();
+    }
+}
+
+function removeFromCart(index) {
+    const item = cart[index];
+    totalAmount -= (item.price * item.quantity);
+    
+    // Remove item from cart
+    cart.splice(index, 1);
+    
+    updateCartUI();
+    saveCartToStorage();
+}
+
+function updateCartUI() {
+    // Update cart count - count total quantity
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cartCount').textContent = totalItems;
+
+    // Update cart items
+    const cartItems = document.getElementById('cartItems');
+    cartItems.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-gray-500 text-center py-2">Keranjang belanja kosong</p>';
+    } else {
+        cart.forEach((item, index) => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'flex justify-between items-center py-2';
+            
+            // Tampilkan potongan harga jika ada
+            const discountText = item.discount > 0 ? 
+                `<div class="text-xs text-green-600">-Rp ${item.discount.toLocaleString()}</div>` : '';
+            
+            itemElement.innerHTML = `
+                <div class="flex items-center flex-1">
+                    <input type="checkbox" id="item${index}" class="mr-2 checkout-select">
+                    <div class="text-sm">
+                        <span class="text-gray-600">${item.name}</span>
+                        <div class="flex flex-col text-xs">
+                            ${item.discount > 0 ? 
+                                `<span class="text-gray-500 line-through">Rp ${item.originalPrice.toLocaleString()}</span>` : ''}
+                            <div class="flex items-center">
+                                <span class="text-gray-500">Rp ${item.price.toLocaleString()} × ${item.quantity}</span>
+                                ${discountText}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-sm font-semibold mr-2">Rp ${(item.price * item.quantity).toLocaleString()}</span>
+                    <i class="ri-delete-bin-line text-gray-400 remove-item" onclick="removeFromCart(${index})"></i>
+                </div>
+            `;
+            cartItems.appendChild(itemElement);
+        });
+    }
+
+    // Update total
+    document.getElementById('cartTotal').textContent = `Rp ${totalAmount.toLocaleString()}`;
+}
+
+function showCheckoutDetails() {
+    const selectedItems = document.querySelectorAll('.checkout-select:checked');
+    if (selectedItems.length === 0) {
+        alert('Pilih minimal satu item untuk checkout');
+        return;
+    }
+
+    const checkoutItems = document.getElementById('checkoutItems');
+    checkoutItems.innerHTML = '';
+
+    selectedItems.forEach(checkbox => {
+        const index = parseInt(checkbox.id.replace('item', ''));
+        const item = cart[index];
+        
+        const itemElement = document.createElement('div');
+        itemElement.className = 'border-b pb-4';
+        
+        // Tampilkan harga asli dan potongan jika ada diskon
+        const priceDisplay = item.discount > 0 ? 
+            `<p class="text-gray-600 mb-1">Harga Asli: <span class="line-through">Rp ${item.originalPrice.toLocaleString()}</span></p>
+             <p class="text-gray-600 mb-1">Potongan: <span class="text-green-600">Rp ${item.discount.toLocaleString()}</span></p>
+             <p class="text-gray-600 mb-2">Harga: Rp ${item.price.toLocaleString()} × ${item.quantity}</p>` :
+            `<p class="text-gray-600 mb-2">Harga: Rp ${item.price.toLocaleString()} × ${item.quantity}</p>`;
+        
+        itemElement.innerHTML = `
+            <h4 class="font-semibold mb-2">${item.name}</h4>
+            ${priceDisplay}
+            <p class="text-gray-600 mb-2">Subtotal: Rp ${(item.price * item.quantity).toLocaleString()}</p>
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <label class="mr-2">Jumlah:</label>
+                    <input type="number" min="1" value="${item.quantity}" 
+                           onchange="updateCheckoutQuantity(${index}, this.value)" 
+                           class="w-16 border rounded px-2 py-1">
+                </div>
+                <a href="${item.link}" target="_blank" 
+                   class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition-colors">
+                    Beli
+                </a>
+            </div>
+        `;
+        checkoutItems.appendChild(itemElement);
+    });
+
+    document.getElementById('checkoutDetails').classList.add('show');
+    }
     </script>
 </body>
     </html>
