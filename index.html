@@ -103,19 +103,13 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
-
-        /* Discount Badge */
-        .discount-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #e53e3e;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            z-index: 1;
+        
+        /* Footer styles */
+        .footer {
+            background-color: #f8f8f8;
+            border-top: 1px solid #e5e5e5;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -175,7 +169,10 @@
                 <button id="openNavbar" class="text-gray-600">
                     <i class="ri-menu-line text-xl"></i>
                 </button>
-                <a href="/" class="text-xl font-semibold text-pink-500">BelanjayuKK</a>
+                <!-- Replaced text with image logo -->
+                <a href="/" class="h-8">
+                    <img src="/api/placeholder/160/40" alt="BelanjayuKK" class="h-full">
+                </a>
                 <div class="flex items-center gap-4 relative">
                     <button id="cartButton" class="text-gray-600 relative">
                         <i class="ri-shopping-cart-line text-xl"></i>
@@ -211,6 +208,50 @@
             <!-- Products will be loaded dynamically from products.js -->
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div>
+                    <h4 class="text-sm font-semibold mb-3">Layanan Pelanggan</h4>
+                    <ul class="text-xs space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-pink-500">Bantuan</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Cara Berbelanja</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Pengiriman</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold mb-3">Tentang Kami</h4>
+                    <ul class="text-xs space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-pink-500">Profil</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold mb-3">Ikuti Kami</h4>
+                    <div class="flex space-x-3 text-gray-600">
+                        <a href="#" class="hover:text-pink-500"><i class="ri-instagram-line text-lg"></i></a>
+                        <a href="#" class="hover:text-pink-500"><i class="ri-facebook-circle-line text-lg"></i></a>
+                        <a href="#" class="hover:text-pink-500"><i class="ri-twitter-line text-lg"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold mb-3">Hubungi Kami</h4>
+                    <p class="text-xs text-gray-600">
+                        <i class="ri-mail-line mr-1"></i> cs@belanjayukk.com
+                    </p>
+                    <p class="text-xs text-gray-600 mt-1">
+                        <i class="ri-phone-line mr-1"></i> 0800-1234-5678
+                    </p>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-200 text-center text-xs text-gray-500">
+                © 2025 BelanjayuKK. Semua hak dilindungi.
+            </div>
+        </div>
+    </footer>
 
     <!-- Checkout Details Modal -->
     <div id="checkoutDetails" class="checkout-details fixed inset-0 bg-black bg-opacity-50 z-50">
@@ -378,7 +419,7 @@
                         </div>
                         <a href="${item.link}" target="_blank" 
                            class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition-colors">
-                            Beli Sekarang
+                            Beli
                         </a>
                     </div>
                 `;
@@ -444,56 +485,51 @@
             document.getElementById('overlay').classList.remove('show');
         });
 
-        <!-- Revisi pada fungsi renderProducts di HTML -->
-function renderProducts(productList) {
-    const productGrid = document.getElementById('productGrid');
-    productGrid.innerHTML = '';
-    
-    if (productList.length === 0) {
-        productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
-        return;
-    }
-    
-    productList.forEach(product => {
-        // Gunakan diskon dari data produk jika ada, atau 0 jika tidak ada
-        const hasDiscount = product.discount > 0 || false;
-        const discountPercentage = product.discount || 0;
-        const discountedPrice = hasDiscount ? 
-            Math.floor(product.price * (1 - discountPercentage / 100)) : product.price;
-        
-        // Gunakan rating dan terjual dari data produk jika ada
-        const rating = product.rating || (Math.random() * 2 + 3).toFixed(1);
-        const terjual = product.sold || Math.floor(Math.random() * 500) + 50;
-        
-        const productElement = document.createElement('div');
-        productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
-        productElement.innerHTML = `
-            <div class="relative">
-                ${hasDiscount ? `<div class="discount-badge">${discountPercentage}% OFF</div>` : ''}
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
-                </div>
-                <div class="p-3">
-                    <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
-                    <div class="flex items-baseline mb-2">
-                        <span class="text-pink-500 font-semibold">Rp ${discountedPrice.toLocaleString()}</span>
-                        ${hasDiscount ? `<span class="ml-2 text-xs text-gray-400 line-through">Rp ${product.price.toLocaleString()}</span>` : ''}
+        // Fungsi renderProducts yang direvisi
+        function renderProducts(productList) {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+            
+            if (productList.length === 0) {
+                productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
+                return;
+            }
+            
+            productList.forEach(product => {
+                // Hapus tampilan diskon
+                const productElement = document.createElement('div');
+                productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
+                productElement.innerHTML = `
+                    <div class="relative">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
+                            <div class="flex items-baseline mb-2">
+                                <span class="text-pink-500 font-semibold">Rp ${product.price.toLocaleString()}</span>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500 mb-2">
+                                <i class="ri-star-fill text-yellow-400 mr-1"></i>
+                                <span>${product.rating || (Math.random() * 2 + 3).toFixed(1)}</span>
+                                <span class="mx-1">|</span>
+                                <span>Terjual ${product.sold || Math.floor(Math.random() * 500) + 50}</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="addToCart(${product.id})" 
+                                        class="flex-1 bg-gray-200 text-gray-700 text-xs rounded-lg py-1.5 mt-1 hover:bg-gray-300 transition-colors">
+                                    + Keranjang
+                                </button>
+                                <a href="${product.buyLink}" 
+                                   class="flex-1 bg-pink-500 text-white text-xs rounded-lg py-1.5 mt-1 hover:bg-pink-600 transition-colors text-center">
+                                    Beli
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center text-xs text-gray-500 mb-2">
-                        <i class="ri-star-fill text-yellow-400 mr-1"></i>
-                        <span>${rating}</span>
-                        <span class="mx-1">|</span>
-                        <span>Terjual ${terjual}</span>
-                    </div>
-                    <button onclick="addToCart(${product.id})" 
-                            class="w-full bg-pink-500 text-white text-xs rounded-lg py-1.5 mt-1 hover:bg-pink-600 transition-colors">
-                        + Keranjang
-                    </button>
-                </div>
-            </div>
-        `;
-        productGrid.appendChild(productElement);
-    });
+                `;
+                productGrid.appendChild(productElement);
+            });
         }
     </script>
 </body>
