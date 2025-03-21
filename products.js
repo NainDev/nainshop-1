@@ -59,5 +59,29 @@ const products = [
         discount: 0,
         rating: 4.9,
         sold: 190
+    }, 
+    {
+        id: 6,
+        category: "Celana",
+        name: "Celana panjang jeans washed loose fit pria",
+        price: 85000,
+        image: "/img/bstation.jpg",
+        detailLink: "/product/celana-code-1",
+        buyLink: "https://vt.tokopedia.com/t/ZSMAvGNBN/",
+        discount: 0,
+        rating: 4.9,
+        sold: 190
+        }, 
+    {
+        id: 7,
+        category: "Celana",
+        name: "Celana panjang jeans washed loose fit pria",
+        price: 85000,
+        image: "/img/wattpad.jpg",
+        detailLink: "/product/celana-code-1",
+        buyLink: "https://vt.tokopedia.com/t/ZSMAvGNBN/",
+        discount: 0,
+        rating: 4.9,
+        sold: 190
     }
 ];
