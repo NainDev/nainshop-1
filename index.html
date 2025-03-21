@@ -444,52 +444,56 @@
             document.getElementById('overlay').classList.remove('show');
         });
 
-        // Override the product rendering function to add animations and discount
-        function renderProducts(productList) {
-            const productGrid = document.getElementById('productGrid');
-            productGrid.innerHTML = '';
-            
-            if (productList.length === 0) {
-                productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
-                return;
-            }
-            
-            productList.forEach(product => {
-                // Calculate a random discount between 5-25%
-                const hasDiscount = Math.random() > 0.5; // 50% chance of having a discount
-                const discountPercentage = hasDiscount ? Math.floor(Math.random() * 20) + 5 : 0;
-                const discountedPrice = hasDiscount ? 
-                    Math.floor(product.price * (1 - discountPercentage / 100)) : product.price;
-                
-                const productElement = document.createElement('div');
-                productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
-                productElement.innerHTML = `
-                    <div class="relative">
-                        ${hasDiscount ? `<div class="discount-badge">${discountPercentage}% OFF</div>` : ''}
-                        <div class="product-image">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
-                        </div>
-                        <div class="p-3">
-                            <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
-                            <div class="flex items-baseline mb-2">
-                                <span class="text-pink-500 font-semibold">Rp ${discountedPrice.toLocaleString()}</span>
-                                ${hasDiscount ? `<span class="ml-2 text-xs text-gray-400 line-through">Rp ${product.price.toLocaleString()}</span>` : ''}
-                            </div>
-                            <div class="flex items-center text-xs text-gray-500 mb-2">
-                                <i class="ri-star-fill text-yellow-400 mr-1"></i>
-                                <span>${(Math.random() * 2 + 3).toFixed(1)}</span>
-                                <span class="mx-1">|</span>
-                                <span>Terjual ${Math.floor(Math.random() * 500) + 50}</span>
-                            </div>
-                            <button onclick="addToCart(${product.id})" 
-                                    class="w-full bg-pink-500 text-white text-xs rounded-lg py-1.5 mt-1 hover:bg-pink-600 transition-colors">
-                                + Keranjang
-                            </button>
-                        </div>
+        <!-- Revisi pada fungsi renderProducts di HTML -->
+function renderProducts(productList) {
+    const productGrid = document.getElementById('productGrid');
+    productGrid.innerHTML = '';
+    
+    if (productList.length === 0) {
+        productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
+        return;
+    }
+    
+    productList.forEach(product => {
+        // Gunakan diskon dari data produk jika ada, atau 0 jika tidak ada
+        const hasDiscount = product.discount > 0 || false;
+        const discountPercentage = product.discount || 0;
+        const discountedPrice = hasDiscount ? 
+            Math.floor(product.price * (1 - discountPercentage / 100)) : product.price;
+        
+        // Gunakan rating dan terjual dari data produk jika ada
+        const rating = product.rating || (Math.random() * 2 + 3).toFixed(1);
+        const terjual = product.sold || Math.floor(Math.random() * 500) + 50;
+        
+        const productElement = document.createElement('div');
+        productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
+        productElement.innerHTML = `
+            <div class="relative">
+                ${hasDiscount ? `<div class="discount-badge">${discountPercentage}% OFF</div>` : ''}
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
+                </div>
+                <div class="p-3">
+                    <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
+                    <div class="flex items-baseline mb-2">
+                        <span class="text-pink-500 font-semibold">Rp ${discountedPrice.toLocaleString()}</span>
+                        ${hasDiscount ? `<span class="ml-2 text-xs text-gray-400 line-through">Rp ${product.price.toLocaleString()}</span>` : ''}
                     </div>
-                `;
-                productGrid.appendChild(productElement);
-            });
+                    <div class="flex items-center text-xs text-gray-500 mb-2">
+                        <i class="ri-star-fill text-yellow-400 mr-1"></i>
+                        <span>${rating}</span>
+                        <span class="mx-1">|</span>
+                        <span>Terjual ${terjual}</span>
+                    </div>
+                    <button onclick="addToCart(${product.id})" 
+                            class="w-full bg-pink-500 text-white text-xs rounded-lg py-1.5 mt-1 hover:bg-pink-600 transition-colors">
+                        + Keranjang
+                    </button>
+                </div>
+            </div>
+        `;
+        productGrid.appendChild(productElement);
+    });
         }
     </script>
 </body>
