@@ -4,7 +4,7 @@ const products = [
         id: 1,
         category: "Aplikasi",
         name: "[ Promo Ramadhan ] Canva Premium | Garansi full 1 Bulan",
-        price: 5000,
+        price: 500000,
         image: "/img/canva.jpg",
         detailLink: "https://www.nainshop.biz.id/details/tws.html",
         buyLink: "https://vt.tokopedia.com/t/ZSMBoyX2x/",
