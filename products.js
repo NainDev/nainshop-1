@@ -8,7 +8,7 @@ const products = [
         image: "/img/canva.jpg",
         detailLink: "https://www.nainshop.biz.id/details/tws.html",
         buyLink: "https://vt.tokopedia.com/t/ZSMBoyX2x/",
-        discount: 15,
+        discount: 2,
         rating: 4.5,
         sold: 320
     },
