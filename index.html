@@ -486,50 +486,45 @@
         });
 
         // Fungsi renderProducts yang direvisi
-        function renderProducts(productList) {
-            const productGrid = document.getElementById('productGrid');
-            productGrid.innerHTML = '';
-            
-            if (productList.length === 0) {
-                productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
-                return;
-            }
-            
-            productList.forEach(product => {
-                // Hapus tampilan diskon
-                const productElement = document.createElement('div');
-                productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
-                productElement.innerHTML = `
-                    <div class="relative">
-                        <div class="product-image">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
-                        </div>
-                        <div class="p-3">
-                            <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
-                            <div class="flex items-baseline mb-2">
-                                <span class="text-pink-500 font-semibold">Rp ${product.price.toLocaleString()}</span>
-                            </div>
-                            <div class="flex items-center text-xs text-gray-500 mb-2">
-                                <i class="ri-star-fill text-yellow-400 mr-1"></i>
-                                <span>${product.rating || (Math.random() * 2 + 3).toFixed(1)}</span>
-                                <span class="mx-1">|</span>
-                                <span>Terjual ${product.sold || Math.floor(Math.random() * 500) + 50}</span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button onclick="addToCart(${product.id})" 
-                                        class="flex-1 bg-gray-200 text-gray-700 text-xs rounded-lg py-1.5 mt-1 hover:bg-gray-300 transition-colors">
-                                    + Keranjang
-                                </button>
-                                <a href="${product.buyLink}" 
-                                   class="flex-1 bg-pink-500 text-white text-xs rounded-lg py-1.5 mt-1 hover:bg-pink-600 transition-colors text-center">
-                                    Beli
-                                </a>
-                            </div>
-                        </div>
+function renderProducts(productList) {
+    const productGrid = document.getElementById('productGrid');
+    productGrid.innerHTML = '';
+    
+    if (productList.length === 0) {
+        productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
+        return;
+    }
+    
+    productList.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
+        productElement.innerHTML = `
+            <div class="relative">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
+                </div>
+                <div class="p-3">
+                    <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
+                    <div class="flex items-baseline mb-2">
+                        <span class="text-pink-500 font-semibold text-base">Rp ${product.price.toLocaleString()}</span>
                     </div>
-                `;
-                productGrid.appendChild(productElement);
-            });
+                    <div class="flex items-center text-xs text-gray-500 mb-2">
+                        <i class="ri-star-fill text-yellow-400 mr-1"></i>
+                        <span>${product.rating || (Math.random() * 2 + 3).toFixed(1)}</span>
+                        <span class="mx-1">|</span>
+                        <span>Terjual ${product.sold || Math.floor(Math.random() * 500) + 50}</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <a href="${product.detailLink}" target="_blank"
+                           class="flex-1 bg-gray-200 text-gray-700 text-sm rounded-lg py-2 mt-1 hover:bg-gray-300 transition-colors text-center">
+                            Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+        productGrid.appendChild(productElement);
+    });
         }
     </script>
 </body>
