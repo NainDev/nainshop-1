@@ -61,27 +61,121 @@
         .remove-item:hover {
             color: #e53e3e;
         }
+
+        /* Sidebar Navbar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 1001;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Product Card Animation */
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Discount Badge */
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e53e3e;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
+    <!-- Sidebar Navbar -->
+    <div id="sidebar" class="sidebar">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">BelanjayuKK</h2>
+                <button id="closeNavbar" class="text-gray-500 hover:text-gray-700">
+                    <i class="ri-close-line text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Search Bar in Navbar -->
+            <div class="mb-6">
+                <div class="relative">
+                    <input type="text" 
+                        id="searchInput"
+                        placeholder="Cari produk..." 
+                        class="w-full bg-gray-100 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300">
+                    <button id="searchButton" class="absolute right-3 top-2.5 text-gray-500">
+                        <i class="ri-search-line text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="space-y-4">
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
+                    <i class="ri-home-4-line"></i>
+                    <span>Beranda</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
+                    <i class="ri-grid-line"></i>
+                    <span>Kategori</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
+                    <i class="ri-heart-line"></i>
+                    <span>Favorit</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
+                    <i class="ri-user-line"></i>
+                    <span>Akun</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Overlay for sidebar -->
+    <div id="overlay" class="overlay"></div>
+
     <!-- Top Navbar -->
     <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center h-16 px-4">
-                <a href="/" class="text-gray-600">
-                    <i class="ri-home-4-line text-xl"></i>
-                </a>
-                <div class="flex-1 mx-4">
-                    <div class="relative">
-                        <input type="text" 
-                            id="searchInput"
-                            placeholder="Cari produk..." 
-                            class="w-full bg-gray-100 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300">
-                        <button id="searchButton" class="absolute right-3 top-2.5 text-gray-500">
-                            <i class="ri-search-line text-lg"></i>
-                        </button>
-                    </div>
-                </div>
+                <button id="openNavbar" class="text-gray-600">
+                    <i class="ri-menu-line text-xl"></i>
+                </button>
+                <a href="/" class="text-xl font-semibold text-pink-500">BelanjayuKK</a>
                 <div class="flex items-center gap-4 relative">
                     <button id="cartButton" class="text-gray-600 relative">
                         <i class="ri-shopping-cart-line text-xl"></i>
@@ -333,6 +427,70 @@
                 searchProducts();
             }
         });
+
+        // Navbar functionality
+        document.getElementById('openNavbar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('overlay').classList.add('show');
+        });
+
+        document.getElementById('closeNavbar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        });
+
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        });
+
+        // Override the product rendering function to add animations and discount
+        function renderProducts(productList) {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+            
+            if (productList.length === 0) {
+                productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
+                return;
+            }
+            
+            productList.forEach(product => {
+                // Calculate a random discount between 5-25%
+                const hasDiscount = Math.random() > 0.5; // 50% chance of having a discount
+                const discountPercentage = hasDiscount ? Math.floor(Math.random() * 20) + 5 : 0;
+                const discountedPrice = hasDiscount ? 
+                    Math.floor(product.price * (1 - discountPercentage / 100)) : product.price;
+                
+                const productElement = document.createElement('div');
+                productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
+                productElement.innerHTML = `
+                    <div class="relative">
+                        ${hasDiscount ? `<div class="discount-badge">${discountPercentage}% OFF</div>` : ''}
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
+                            <div class="flex items-baseline mb-2">
+                                <span class="text-pink-500 font-semibold">Rp ${discountedPrice.toLocaleString()}</span>
+                                ${hasDiscount ? `<span class="ml-2 text-xs text-gray-400 line-through">Rp ${product.price.toLocaleString()}</span>` : ''}
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500 mb-2">
+                                <i class="ri-star-fill text-yellow-400 mr-1"></i>
+                                <span>${(Math.random() * 2 + 3).toFixed(1)}</span>
+                                <span class="mx-1">|</span>
+                                <span>Terjual ${Math.floor(Math.random() * 500) + 50}</span>
+                            </div>
+                            <button onclick="addToCart(${product.id})" 
+                                    class="w-full bg-pink-500 text-white text-xs rounded-lg py-1.5 mt-1 hover:bg-pink-600 transition-colors">
+                                + Keranjang
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productGrid.appendChild(productElement);
+            });
+        }
     </script>
 </body>
-  </html>
+    </html>
