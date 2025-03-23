@@ -15,6 +15,7 @@
             background-color: #f8f9fa;
             max-width: 768px;
             margin: 0 auto;
+            font-size: 16px; /* Ukuran font dasar lebih besar */
         }
 
         .product-title {
@@ -22,22 +23,6 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-        }
-
-        .cart-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 320px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        .cart-dropdown.show {
-            display: block;
         }
 
         .checkout-details {
@@ -112,6 +97,29 @@
             padding: 1.5rem 0;
             margin-top: 2rem;
         }
+
+        /* Memperbesar ukuran font dan elemen */
+        .nav-link {
+            font-size: 1.1rem; /* Font menu lebih besar */
+        }
+
+        .search-input {
+            font-size: 1.1rem; /* Font pencarian lebih besar */
+            padding: 0.6rem 1rem; /* Padding lebih besar */
+        }
+
+        .btn {
+            font-size: 1rem; /* Font tombol lebih besar */
+            padding: 0.6rem 1.2rem; /* Padding tombol lebih besar */
+        }
+
+        .footer-heading {
+            font-size: 1.1rem; /* Font judul footer lebih besar */
+        }
+
+        .footer-link {
+            font-size: 0.95rem; /* Font link footer lebih besar */
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
@@ -119,9 +127,9 @@
     <div id="sidebar" class="sidebar">
         <div class="p-4">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold text-gray-800">Nain Shop</h2>
+                <h2 class="text-2xl font-semibold text-gray-800">Nain Shop</h2>
                 <button id="closeNavbar" class="text-gray-500 hover:text-gray-700">
-                    <i class="ri-close-line text-xl"></i>
+                    <i class="ri-close-line text-2xl"></i>
                 </button>
             </div>
             
@@ -131,29 +139,29 @@
                     <input type="text" 
                         id="searchInput"
                         placeholder="Cari produk..." 
-                        class="w-full bg-gray-100 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300">
-                    <button id="searchButton" class="absolute right-3 top-2.5 text-gray-500">
-                        <i class="ri-search-line text-lg"></i>
+                        class="w-full bg-gray-100 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300 search-input">
+                    <button id="searchButton" class="absolute right-3 top-3.5 text-gray-500">
+                        <i class="ri-search-line text-xl"></i>
                     </button>
                 </div>
             </div>
             
             <!-- Navigation Links -->
-            <nav class="space-y-4">
-                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
-                    <i class="ri-home-4-line"></i>
+            <nav class="space-y-5">
+                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-home-4-line text-xl"></i>
                     <span>Beranda</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
-                    <i class="ri-grid-line"></i>
+                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-grid-line text-xl"></i>
                     <span>Kategori</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
-                    <i class="ri-heart-line"></i>
+                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-heart-line text-xl"></i>
                     <span>Favorit</span>
                 </a>
-                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500">
-                    <i class="ri-user-line"></i>
+                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-user-line text-xl"></i>
                     <span>Akun</span>
                 </a>
             </nav>
@@ -168,36 +176,14 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center h-16 px-4">
                 <button id="openNavbar" class="text-gray-600">
-                    <i class="ri-menu-line text-xl"></i>
+                    <i class="ri-menu-line text-2xl"></i>
                 </button>
                 <!-- Replaced text with image logo -->
-                <a href="/" class="h-8">
+                <a href="/" class="h-10">
                     <img src="/img/logo.png" alt="NainShop" class="h-full">
                 </a>
-                <div class="flex items-center gap-4 relative">
-                    <button id="cartButton" class="text-gray-600 relative">
-                        <i class="ri-shopping-cart-line text-xl"></i>
-                        <span id="cartCount" class="absolute -top-2 -right-2 bg-pink-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
-                    </button>
-                    <!-- Cart Dropdown -->
-                    <div id="cartDropdown" class="cart-dropdown">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-800 mb-4">Keranjang Belanja</h3>
-                            <div id="cartItems" class="space-y-3">
-                                <!-- Cart items will be dynamically added here -->
-                            </div>
-                            <div class="mt-4 pt-4 border-t">
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-gray-600">Total:</span>
-                                    <span id="cartTotal" class="font-semibold text-pink-500">Rp 0</span>
-                                </div>
-                                <button onclick="showCheckoutDetails()" class="w-full bg-pink-500 text-white rounded-lg py-2 hover:bg-pink-600 transition-colors">
-                                    Checkout
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Menghilangkan ikon keranjang -->
+                <div class="w-6"></div> <!-- Spacer untuk menjaga layout -->
             </div>
         </div>
     </nav>
@@ -215,40 +201,40 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                    <h4 class="text-sm font-semibold mb-3">Layanan Pelanggan</h4>
-                    <ul class="text-xs space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:text-pink-500">Bantuan</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Cara Berbelanja</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Pengiriman</a></li>
+                    <h4 class="text-base font-semibold mb-3 footer-heading">Layanan Pelanggan</h4>
+                    <ul class="text-sm space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-pink-500 footer-link">Bantuan</a></li>
+                        <li><a href="#" class="hover:text-pink-500 footer-link">Cara Berbelanja</a></li>
+                        <li><a href="#" class="hover:text-pink-500 footer-link">Pengiriman</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-semibold mb-3">Tentang Kami</h4>
-                    <ul class="text-xs space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:text-pink-500">Profil</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Syarat & Ketentuan</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Kebijakan Privasi</a></li>
+                    <h4 class="text-base font-semibold mb-3 footer-heading">Tentang Kami</h4>
+                    <ul class="text-sm space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-pink-500 footer-link">Profil</a></li>
+                        <li><a href="#" class="hover:text-pink-500 footer-link">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-pink-500 footer-link">Kebijakan Privasi</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-semibold mb-3">Ikuti Kami</h4>
-                    <div class="flex space-x-3 text-gray-600">
-                        <a href="#" class="hover:text-pink-500"><i class="ri-instagram-line text-lg"></i></a>
-                        <a href="#" class="hover:text-pink-500"><i class="ri-facebook-circle-line text-lg"></i></a>
-                        <a href="#" class="hover:text-pink-500"><i class="ri-twitter-line text-lg"></i></a>
+                    <h4 class="text-base font-semibold mb-3 footer-heading">Ikuti Kami</h4>
+                    <div class="flex space-x-4 text-gray-600">
+                        <a href="#" class="hover:text-pink-500"><i class="ri-instagram-line text-xl"></i></a>
+                        <a href="#" class="hover:text-pink-500"><i class="ri-facebook-circle-line text-xl"></i></a>
+                        <a href="#" class="hover:text-pink-500"><i class="ri-twitter-line text-xl"></i></a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-sm font-semibold mb-3">Hubungi Kami</h4>
-                    <p class="text-xs text-gray-600">
+                    <h4 class="text-base font-semibold mb-3 footer-heading">Hubungi Kami</h4>
+                    <p class="text-sm text-gray-600 footer-link">
                         <i class="ri-mail-line mr-1"></i> nainshop@biz.id
                     </p>
-                    <p class="text-xs text-gray-600 mt-1">
+                    <p class="text-sm text-gray-600 mt-1 footer-link">
                         <i class="ri-phone-line mr-1"></i> 0838-7460-7050
                     </p>
                 </div>
             </div>
-            <div class="mt-6 pt-4 border-t border-gray-200 text-center text-xs text-gray-500">
+            <div class="mt-6 pt-4 border-t border-gray-200 text-center text-sm text-gray-500">
                 © 2025 NainShop. Semua hak dilindungi.
             </div>
         </div>
@@ -257,11 +243,11 @@
     <!-- Checkout Details Modal -->
     <div id="checkoutDetails" class="checkout-details fixed inset-0 bg-black bg-opacity-50 z-50">
         <div class="bg-white max-w-md mx-auto mt-20 rounded-lg shadow-lg">
-            <div class="p-4">
+            <div class="p-5">
                 <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-semibold text-lg">Detail Checkout</h3>
+                    <h3 class="font-semibold text-xl">Detail Checkout</h3>
                     <button onclick="hideCheckoutDetails()" class="text-gray-500 hover:text-gray-700">
-                        <i class="ri-close-line text-xl"></i>
+                        <i class="ri-close-line text-2xl"></i>
                     </button>
                 </div>
                 <div id="checkoutItems" class="space-y-4">
@@ -274,7 +260,7 @@
     <!-- Load Products Script -->
     <script src="products.js"></script>
     
-    <!-- Cart Script -->
+    <!-- Script -->
     <script>
         // Cart functionality
         let cart = [];
@@ -300,155 +286,7 @@
             if (savedCart) {
                 cart = JSON.parse(savedCart);
                 totalAmount = savedTotal ? parseFloat(savedTotal) : 0;
-                updateCartUI();
             }
-        }
-
-        // Toggle cart dropdown
-        document.getElementById('cartButton').addEventListener('click', function() {
-            document.getElementById('cartDropdown').classList.toggle('show');
-        });
-
-        // Close dropdown when clicking outside
-        window.addEventListener('click', function(event) {
-            if (!event.target.closest('#cartButton') && !event.target.closest('#cartDropdown')) {
-                document.getElementById('cartDropdown').classList.remove('show');
-            }
-        });
-
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (product) {
-                // Check if product already exists in cart
-                const existingItemIndex = cart.findIndex(item => item.id === productId);
-                
-                if (existingItemIndex >= 0) {
-                    // Increase quantity if product already in cart
-                    cart[existingItemIndex].quantity += 1;
-                } else {
-                    // Add new product to cart
-                    cart.push({ 
-                        id: product.id,
-                        name: product.name, 
-                        price: product.price, 
-                        link: product.buyLink,
-                        quantity: 1
-                    });
-                }
-                
-                totalAmount += product.price;
-                updateCartUI();
-                saveCartToStorage();
-            }
-        }
-        
-        function removeFromCart(index) {
-            const item = cart[index];
-            totalAmount -= (item.price * item.quantity);
-            
-            // Remove item from cart
-            cart.splice(index, 1);
-            
-            updateCartUI();
-            saveCartToStorage();
-        }
-
-        function updateCartUI() {
-            // Update cart count - count total quantity
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cartCount').textContent = totalItems;
-
-            // Update cart items
-            const cartItems = document.getElementById('cartItems');
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-gray-500 text-center py-2">Keranjang belanja kosong</p>';
-            } else {
-                cart.forEach((item, index) => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'flex justify-between items-center py-2';
-                    itemElement.innerHTML = `
-                        <div class="flex items-center flex-1">
-                            <input type="checkbox" id="item${index}" class="mr-2 checkout-select">
-                            <div class="text-sm">
-                                <span class="text-gray-600">${item.name}</span>
-                                <div class="flex items-center text-xs text-gray-500">
-                                    <span>Rp ${item.price.toLocaleString()} × ${item.quantity}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-sm font-semibold mr-2">Rp ${(item.price * item.quantity).toLocaleString()}</span>
-                            <i class="ri-delete-bin-line text-gray-400 remove-item" onclick="removeFromCart(${index})"></i>
-                        </div>
-                    `;
-                    cartItems.appendChild(itemElement);
-                });
-            }
-
-            // Update total
-            document.getElementById('cartTotal').textContent = `Rp ${totalAmount.toLocaleString()}`;
-        }
-
-        function showCheckoutDetails() {
-            const selectedItems = document.querySelectorAll('.checkout-select:checked');
-            if (selectedItems.length === 0) {
-                alert('Pilih minimal satu item untuk checkout');
-                return;
-            }
-
-            const checkoutItems = document.getElementById('checkoutItems');
-            checkoutItems.innerHTML = '';
-
-            selectedItems.forEach(checkbox => {
-                const index = parseInt(checkbox.id.replace('item', ''));
-                const item = cart[index];
-                
-                const itemElement = document.createElement('div');
-                itemElement.className = 'border-b pb-4';
-                itemElement.innerHTML = `
-                    <h4 class="font-semibold mb-2">${item.name}</h4>
-                    <p class="text-gray-600 mb-2">Harga: Rp ${item.price.toLocaleString()} × ${item.quantity}</p>
-                    <p class="text-gray-600 mb-2">Subtotal: Rp ${(item.price * item.quantity).toLocaleString()}</p>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <label class="mr-2">Jumlah:</label>
-                            <input type="number" min="1" value="${item.quantity}" 
-                                   onchange="updateCheckoutQuantity(${index}, this.value)" 
-                                   class="w-16 border rounded px-2 py-1">
-                        </div>
-                        <a href="${item.link}" target="_blank" 
-                           class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition-colors">
-                            Beli
-                        </a>
-                    </div>
-                `;
-                checkoutItems.appendChild(itemElement);
-            });
-
-            document.getElementById('checkoutDetails').classList.add('show');
-        }
-        
-        function updateCheckoutQuantity(index, quantity) {
-            quantity = parseInt(quantity);
-            if (isNaN(quantity) || quantity < 1) {
-                quantity = 1;
-            }
-            
-            const item = cart[index];
-            const oldQuantity = item.quantity;
-            
-            // Update quantity and total
-            item.quantity = quantity;
-            totalAmount += (quantity - oldQuantity) * item.price;
-            
-            updateCartUI();
-            saveCartToStorage();
-        }
-
-        function hideCheckoutDetails() {
-            document.getElementById('checkoutDetails').classList.remove('show');
         }
 
         // Search functionality
@@ -461,6 +299,12 @@
                 ) : products;
             
             renderProducts(filteredProducts);
+            
+            // Tutup navbar ketika enter
+            if (document.getElementById('sidebar').classList.contains('open')) {
+                document.getElementById('sidebar').classList.remove('open');
+                document.getElementById('overlay').classList.remove('show');
+            }
         }
 
         document.getElementById('searchButton').addEventListener('click', searchProducts);
@@ -487,198 +331,64 @@
         });
 
         // Fungsi renderProducts yang direvisi
-function renderProducts(productList) {
-    const productGrid = document.getElementById('productGrid');
-    productGrid.innerHTML = '';
-    
-    if (productList.length === 0) {
-        productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500">Tidak ada produk yang ditemukan</div>';
-        return;
-    }
-    
-    productList.forEach(product => {
-        const productElement = document.createElement('div');
-        productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
-        
-        // Menghitung harga setelah potongan
-        const finalPrice = product.discount ? product.price - product.discount : product.price;
-        
-        productElement.innerHTML = `
-            <div class="relative">
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-36 object-cover">
-                </div>
-                <div class="p-3">
-                    <h3 class="product-title text-sm font-semibold text-gray-800 mb-1">${product.name}</h3>
-                    <div class="flex flex-col mb-2">
-                        ${product.discount ? 
-                            `<span class="text-gray-500 text-xs line-through">Rp ${product.price.toLocaleString()}</span>
-                             <div class="flex items-center">
-                                <span class="text-pink-500 font-semibold text-base">Rp ${finalPrice.toLocaleString()}</span>
-                                <span class="text-xs text-green-600 ml-2">-Rp ${product.discount.toLocaleString()}</span>
-                             </div>` 
-                            : 
-                            `<span class="text-pink-500 font-semibold text-base">Rp ${finalPrice.toLocaleString()}</span>`
-                        }
-                    </div>
-                    <div class="flex items-center text-xs text-gray-500 mb-2">
-                        <i class="ri-star-fill text-yellow-400 mr-1"></i>
-                        <span>${product.rating || (Math.random() * 2 + 3).toFixed(1)}</span>
-                        <span class="mx-1">|</span>
-                        <span>Terjual ${product.sold || Math.floor(Math.random() * 500) + 50}</span>
-                    </div>
-                    <div class="flex space-x-2">
-                        <a href="${product.detailLink}" class="flex-1 bg-gray-200 text-gray-700 text-sm rounded-lg py-2 mt-1 hover:bg-gray-300 transition-colors text-center">
-                            Detail
-                        </a>
-                        <button onclick="addToCart(${product.id})" 
-                            class="flex-1 bg-pink-500 text-white text-sm rounded-lg py-2 mt-1 hover:bg-pink-600 transition-colors">
-                            + Keranjang
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        productGrid.appendChild(productElement);
-    });
-}
-
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        // Check if product already exists in cart
-        const existingItemIndex = cart.findIndex(item => item.id === productId);
-        
-        // Menghitung harga setelah potongan
-        const finalPrice = product.discount ? product.price - product.discount : product.price;
-        
-        if (existingItemIndex >= 0) {
-            // Increase quantity if product already in cart
-            cart[existingItemIndex].quantity += 1;
-        } else {
-            // Add new product to cart
-            cart.push({ 
-                id: product.id,
-                name: product.name, 
-                originalPrice: product.price,
-                discount: product.discount || 0,
-                price: finalPrice,
-                link: product.buyLink,
-                quantity: 1
-            });
-        }
-        
-        totalAmount += finalPrice;
-        updateCartUI();
-        saveCartToStorage();
-    }
-}
-
-function removeFromCart(index) {
-    const item = cart[index];
-    totalAmount -= (item.price * item.quantity);
-    
-    // Remove item from cart
-    cart.splice(index, 1);
-    
-    updateCartUI();
-    saveCartToStorage();
-}
-
-function updateCartUI() {
-    // Update cart count - count total quantity
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById('cartCount').textContent = totalItems;
-
-    // Update cart items
-    const cartItems = document.getElementById('cartItems');
-    cartItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-gray-500 text-center py-2">Keranjang belanja kosong</p>';
-    } else {
-        cart.forEach((item, index) => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'flex justify-between items-center py-2';
+        function renderProducts(productList) {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
             
-            // Tampilkan potongan harga jika ada
-            const discountText = item.discount > 0 ? 
-                `<div class="text-xs text-green-600">-Rp ${item.discount.toLocaleString()}</div>` : '';
+            if (productList.length === 0) {
+                productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500 text-base">Tidak ada produk yang ditemukan</div>';
+                return;
+            }
             
-            itemElement.innerHTML = `
-                <div class="flex items-center flex-1">
-                    <input type="checkbox" id="item${index}" class="mr-2 checkout-select">
-                    <div class="text-sm">
-                        <span class="text-gray-600">${item.name}</span>
-                        <div class="flex flex-col text-xs">
-                            ${item.discount > 0 ? 
-                                `<span class="text-gray-500 line-through">Rp ${item.originalPrice.toLocaleString()}</span>` : ''}
-                            <div class="flex items-center">
-                                <span class="text-gray-500">Rp ${item.price.toLocaleString()} × ${item.quantity}</span>
-                                ${discountText}
+            productList.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
+                
+                // Menghitung harga setelah potongan
+                const finalPrice = product.discount ? product.price - product.discount : product.price;
+                
+                productElement.innerHTML = `
+                    <div class="relative">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-40 object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="product-title text-base font-semibold text-gray-800 mb-2">${product.name}</h3>
+                            <div class="flex flex-col mb-3">
+                                ${product.discount ? 
+                                    `<span class="text-gray-500 text-sm line-through">Rp ${product.price.toLocaleString()}</span>
+                                     <div class="flex items-center">
+                                        <span class="text-pink-500 font-semibold text-lg">Rp ${finalPrice.toLocaleString()}</span>
+                                        <span class="text-sm text-green-600 ml-2">-Rp ${product.discount.toLocaleString()}</span>
+                                     </div>` 
+                                    : 
+                                    `<span class="text-pink-500 font-semibold text-lg">Rp ${finalPrice.toLocaleString()}</span>`
+                                }
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <i class="ri-star-fill text-yellow-400 mr-1"></i>
+                                <span>${product.rating || (Math.random() * 2 + 3).toFixed(1)}</span>
+                                <span class="mx-1">|</span>
+                                <span>Terjual ${product.sold || Math.floor(Math.random() * 500) + 50}</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <a href="${product.detailLink}" class="flex-1 bg-gray-200 text-gray-700 text-base rounded-lg py-2.5 hover:bg-gray-300 transition-colors text-center">
+                                    Detail
+                                </a>
+                                <a href="${product.buyLink}" class="flex-1 bg-pink-500 text-white text-base rounded-lg py-2.5 hover:bg-pink-600 transition-colors text-center">
+                                    Beli
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-sm font-semibold mr-2">Rp ${(item.price * item.quantity).toLocaleString()}</span>
-                    <i class="ri-delete-bin-line text-gray-400 remove-item" onclick="removeFromCart(${index})"></i>
-                </div>
-            `;
-            cartItems.appendChild(itemElement);
-        });
-    }
+                `;
+                productGrid.appendChild(productElement);
+            });
+        }
 
-    // Update total
-    document.getElementById('cartTotal').textContent = `Rp ${totalAmount.toLocaleString()}`;
-}
-
-function showCheckoutDetails() {
-    const selectedItems = document.querySelectorAll('.checkout-select:checked');
-    if (selectedItems.length === 0) {
-        alert('Pilih minimal satu item untuk checkout');
-        return;
-    }
-
-    const checkoutItems = document.getElementById('checkoutItems');
-    checkoutItems.innerHTML = '';
-
-    selectedItems.forEach(checkbox => {
-        const index = parseInt(checkbox.id.replace('item', ''));
-        const item = cart[index];
-        
-        const itemElement = document.createElement('div');
-        itemElement.className = 'border-b pb-4';
-        
-        // Tampilkan harga asli dan potongan jika ada diskon
-        const priceDisplay = item.discount > 0 ? 
-            `<p class="text-gray-600 mb-1">Harga Asli: <span class="line-through">Rp ${item.originalPrice.toLocaleString()}</span></p>
-             <p class="text-gray-600 mb-1">Potongan: <span class="text-green-600">Rp ${item.discount.toLocaleString()}</span></p>
-             <p class="text-gray-600 mb-2">Harga: Rp ${item.price.toLocaleString()} × ${item.quantity}</p>` :
-            `<p class="text-gray-600 mb-2">Harga: Rp ${item.price.toLocaleString()} × ${item.quantity}</p>`;
-        
-        itemElement.innerHTML = `
-            <h4 class="font-semibold mb-2">${item.name}</h4>
-            ${priceDisplay}
-            <p class="text-gray-600 mb-2">Subtotal: Rp ${(item.price * item.quantity).toLocaleString()}</p>
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <label class="mr-2">Jumlah:</label>
-                    <input type="number" min="1" value="${item.quantity}" 
-                           onchange="updateCheckoutQuantity(${index}, this.value)" 
-                           class="w-16 border rounded px-2 py-1">
-                </div>
-                <a href="${item.link}" target="_blank" 
-                   class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition-colors">
-                    Beli
-                </a>
-            </div>
-        `;
-        checkoutItems.appendChild(itemElement);
-    });
-
-    document.getElementById('checkoutDetails').classList.add('show');
-    }
+        function hideCheckoutDetails() {
+            document.getElementById('checkoutDetails').classList.remove('show');
+        }
     </script>
 </body>
     </html>
