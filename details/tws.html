@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Produk - BelanjayuKK</title>
+    <title>Detail Produk - Canva Premium</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <style>
@@ -148,43 +148,22 @@
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
-    <!-- Top Navbar -->
-    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-center h-16 px-4">
-                <a href="/" class="text-gray-600">
-                    <i class="ri-arrow-left-line text-xl"></i>
-                </a>
-                <div class="flex-1 mx-4">
-                    <h1 class="text-center text-gray-800 font-semibold">Detail Produk</h1>
-                </div>
-                <div class="flex items-center gap-4 relative">
-                    <button id="cartButton" class="text-gray-600 relative">
-                        <i class="ri-shopping-cart-line text-xl"></i>
-                        <span id="cartCount" class="absolute -top-2 -right-2 bg-pink-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
-                    </button>
-                    <!-- Cart Dropdown -->
-                    <div id="cartDropdown" class="cart-dropdown">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-800 mb-4">Keranjang Belanja</h3>
-                            <div id="cartItems" class="space-y-3">
-                                <!-- Cart items will be dynamically added here -->
-                            </div>
-                            <div class="mt-4 pt-4 border-t">
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-gray-600">Total:</span>
-                                    <span id="cartTotal" class="font-semibold text-pink-500">Rp 0</span>
-                                </div>
-                                <button onclick="showCheckoutDetails()" class="w-full bg-pink-500 text-white rounded-lg py-2 hover:bg-pink-600 transition-colors">
-                                    Checkout
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Top Navbar -->
+<nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center h-16 px-4">
+            <a href="/" class="text-gray-600">
+                <i class="ri-arrow-left-line text-xl"></i>
+            </a>
+            <div class="flex-1 mx-4">
+                <h1 class="text-center text-gray-800 font-semibold">Detail Produk</h1>
+            </div>
+            <div class="flex items-center gap-4 relative">
+                <!-- Menghilangkan elemen keranjang -->
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Main Content -->
     <div class="mt-20 pb-24">
@@ -215,30 +194,28 @@
             </div>
         </div>
 
-        <!-- Product Info -->
-        <div class="p-4 bg-white mb-3">
-            <div class="flex items-center justify-between mb-2">
-                <h1 class="text-xl font-semibold text-gray-800">Sepatu Olahraga MultiSport X-Zone Premium</h1>
-                <button class="text-pink-500">
-                    <i class="ri-heart-3-line text-xl"></i>
-                </button>
-            </div>
-            <div class="flex items-baseline mb-3">
-                <span class="text-2xl font-semibold text-pink-500">Rp 299.000</span>
-                <span class="text-gray-400 text-sm line-through ml-2">Rp 499.000</span>
-                <span class="ml-2 bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded">40% OFF</span>
-            </div>
-            <div class="flex items-center text-sm text-gray-600 mb-1">
-                <i class="ri-star-fill text-yellow-400"></i>
-                <span class="ml-1">4.8</span>
-                <span class="mx-1">|</span>
-                <span>1.254 Terjual</span>
-            </div>
-            <div class="text-sm text-gray-600">
-                <i class="ri-map-pin-line"></i>
-                <span class="ml-1">Jakarta Selatan</span>
-            </div>
-        </div>
+<!-- Product Info -->
+<div class="p-4 bg-white mb-3">
+    <div class="flex items-center justify-between mb-2">
+        <h1 class="text-xl font-semibold text-gray-800" id="productName">Canva Premium Murah, Unlock elemen Premium & Bergaransi, Spesial Ramadhan😍</h1>
+        <!-- Menghilangkan tombol wishlist icon love -->
+    </div>
+    <div class="flex items-baseline mb-3">
+        <span class="text-2xl font-semibold text-pink-500" id="productPrice">Rp 3.000</span>
+        <span class="text-gray-400 text-sm line-through ml-2" id="productOriginalPrice">Rp 5.000</span>
+
+    </div>
+    <div class="flex items-center text-sm text-gray-600 mb-1">
+        <i class="ri-star-fill text-yellow-400"></i>
+        <span class="ml-1" id="productRating">4.8</span>
+        <span class="mx-1">|</span>
+        <span id="productSold">30 Terjual</span>
+    </div>
+    <div class="text-sm text-gray-600">
+        <i class="ri-map-pin-line"></i>
+        <span class="ml-1" id="productLocation">Cirebon</span>
+    </div>
+</div>
 
         <!-- Product Tabs -->
         <div class="bg-white mb-20">
@@ -250,54 +227,49 @@
             <div class="px-4">
                 <div id="description" class="tab-content active">
                     <p class="text-gray-600 mb-4">
-                        Sepatu olahraga multisport X-Zone hadir dengan desain premium dan teknologi terkini untuk memberikan kenyamanan maksimal saat berolahraga.
+                     Dapatkan <strong>Canva Premium</strong> dengan harga terbaik! Nikmati fitur eksklusif seperti elemen premium, font, dan template tanpa batas untuk desain yang lebih profesional.
                     </p>
                     <p class="text-gray-600 mb-4">
                         Fitur unggulan:
                     </p>
-                    <ul class="list-disc pl-5 text-gray-600 mb-4">
-                        <li>Sol berbahan EVA dengan teknologi shock absorber</li>
-                        <li>Upper breathable mesh untuk sirkulasi udara maksimal</li>
-                        <li>Insole ergonomis dengan dukungan arch support</li>
-                        <li>Outsole anti-slip untuk grip maksimal di berbagai permukaan</li>
-                        <li>Berat super ringan (280 gram per sepatu)</li>
-                    </ul>
+<ul class="list-disc pl-5 text-gray-600 mb-4">
+    <li>Akses Premium ke Template dan Elemen Desain:</li>
+    <li>Magic Resize</li>
+    <li>Brand Kit</li>
+    <li>Penghapus Latar Belakang</li>
+    <li>Kolaborasi Tim</li>
+    <li>Konten Planner</li>
+    <li>Animasi dan GIF</li>
+    <li>Penyimpanan Tanpa Batas</li>
+</ul>
                     <p class="text-gray-600 mb-4">
-                        Cocok untuk berbagai aktivitas seperti lari, gym, tenis, dan olahraga umum lainnya. Hadir dalam berbagai pilihan warna dan ukuran.
+                      Cocok buat kamu yang sering ngedit-ngedit! Untuk berlangganan Canva Premium dan mendapatkan garansi penuh sesuai dengan masa durasi yang dipilih, nikmati berbagai fitur eksklusif yang mendukung kreativitas tanpa batas.
                     </p>
                     <p class="text-gray-600">
-                        Garansi resmi 1 tahun untuk sol dan 6 bulan untuk upper. Free return dalam 7 hari jika terdapat cacat produksi.
+                      Garansi resmi mencakup seluruh layanan selama periode berlangganan. Jika terdapat kendala, hubungi admin secepatnya.
                     </p>
                 </div>
                 <div id="specification" class="tab-content">
                     <table class="w-full">
                         <tr class="border-b">
-                            <td class="py-2 text-gray-600 font-medium">Merk</td>
-                            <td class="py-2 text-gray-800">X-Zone</td>
+                            <td class="py-2 text-gray-600 font-medium">Aplikasi</td>
+                            <td class="py-2 text-gray-800">Canva</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 text-gray-600 font-medium">Bahan Upper</td>
-                            <td class="py-2 text-gray-800">Mesh Fabric + PU Leather</td>
+                            <td class="py-2 text-gray-600 font-medium">Elemen Premium</td>
+                            <td class="py-2 text-gray-800">Terbuka 🔓</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 text-gray-600 font-medium">Bahan Sol</td>
-                            <td class="py-2 text-gray-800">EVA + Rubber</td>
+                            <td class="py-2 text-gray-600 font-medium">Durasi</td>
+                            <td class="py-2 text-gray-800">1 Bulan, 3 Bulan, 6 Bulan, 1 Tahun</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 text-gray-600 font-medium">Ukuran Tersedia</td>
-                            <td class="py-2 text-gray-800">38, 39, 40, 41, 42, 43, 44</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-2 text-gray-600 font-medium">Berat</td>
-                            <td class="py-2 text-gray-800">280 gram/sepatu</td>
+                            <td class="py-2 text-gray-600 font-medium">Tipe</td>
+                            <td class="py-2 text-gray-800">Premium</td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-2 text-gray-600 font-medium">Garansi</td>
-                            <td class="py-2 text-gray-800">1 tahun sol, 6 bulan upper</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2 text-gray-600 font-medium">Negara Asal</td>
-                            <td class="py-2 text-gray-800">Indonesia</td>
+                            <td class="py-2 text-gray-800">Full 100%</td>
                         </tr>
                     </table>
                 </div>
@@ -370,27 +342,25 @@
         </div>
     </div>
 
-    <!-- Sticky Bottom Add to Cart -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t p-4 z-10" style="max-width: 768px; margin: 0 auto;">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <button class="w-10 h-10 border rounded-lg flex items-center justify-center mr-2">
-                    <i class="ri-store-2-line text-gray-600"></i>
-                </button>
-                <button class="w-10 h-10 border rounded-lg flex items-center justify-center">
-                    <i class="ri-customer-service-2-line text-gray-600"></i>
-                </button>
-            </div>
-            <div class="flex-1 flex ml-4">
-                <button onclick="addToCart('shoe001')" class="flex-1 bg-pink-100 text-pink-500 rounded-l-lg py-3 font-medium">
-                    Tambah ke Keranjang
-                </button>
-                <button class="flex-1 bg-pink-500 text-white rounded-r-lg py-3 font-medium">
-                    Beli Sekarang
-                </button>
-            </div>
+<!-- Sticky Bottom Buy Button -->
+<div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t p-4 z-10" style="max-width: 768px; margin: 0 auto;">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center">
+            <button class="w-10 h-10 border rounded-lg flex items-center justify-center mr-2">
+                <i class="ri-store-2-line text-gray-600"></i>
+            </button>
+            <button class="w-10 h-10 border rounded-lg flex items-center justify-center">
+                <i class="ri-customer-service-2-line text-gray-600"></i>
+            </button>
+        </div>
+        <div class="flex-1 flex ml-4">
+            <!-- Menghilangkan tombol "Tambah ke Keranjang" dan membuat tombol "Beli Sekarang" full width -->
+            <button id="buyNowButton" class="flex-1 bg-pink-500 text-white rounded-lg py-3 font-medium">
+                Beli Sekarang
+            </button>
         </div>
     </div>
+</div>
 
     <!-- Checkout Details Modal -->
     <div id="checkoutDetails" class="checkout-details fixed inset-0 bg-black bg-opacity-50 z-50">
@@ -411,264 +381,337 @@
 
     <!-- Product and Cart Scripts -->
     <script>
-        // Product definition
-        const currentProduct = {
-            id: 'shoe001',
-            name: 'Sepatu Olahraga MultiSport X-Zone Premium',
-            price: 299000,
-            originalPrice: 499000,
-            discount: 40,
-            images: [
-                '/api/placeholder/640/480',
-                '/api/placeholder/640/480',
-                '/api/placeholder/640/480',
-                '/api/placeholder/640/480'
-            ],
-            rating: 4.8,
-            sold: 1254,
-            location: 'Jakarta Selatan',
-            buyLink: '#'
-        };
+// Product definition
+const currentProduct = {
+    id: 'canva001',
+    name: 'Canva Premium Murah, Unlock elemen Premium & Bergaransi, Spesial Ramadhan😍',
+    price: 3000,
+    originalPrice: 5000,
+    discount: 50,
+    images: [
+        '/details/img/canva-1.jpg',
+        '/api/placeholder/640/480',
+        '/api/placeholder/640/480',
+        '/api/placeholder/640/480'
+    ],
+    rating: 4.8,
+    sold: 30,
+    location: 'Cirebon',
+    buyLink: '#'
+};
 
-        // Cart functionality
-        let cart = [];
-        let totalAmount = 0;
-        
-        // Image slider functionality
-        let currentSlide = 0;
-        const slider = document.getElementById('productSlider');
-        const sliderNav = document.getElementById('sliderNav');
-        const slides = document.querySelectorAll('.slide');
-        
-        // Create slider dots
-        for (let i = 0; i < slides.length; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => {
-                goToSlide(i);
-            };
-            sliderNav.appendChild(dot);
-        }
-        
-        function goToSlide(n) {
-            currentSlide = n;
-            updateSlider();
-        }
-        
-        function updateSlider() {
-            slider.style.transform = `translateX(${-currentSlide * 100}%)`;
-            
-            // Update dots
-            const dots = document.querySelectorAll('.slider-dot');
-            dots.forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-        
-        document.getElementById('sliderLeft').addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateSlider();
-        });
-        
-        document.getElementById('sliderRight').addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateSlider();
-        });
-        
-        // Tab functionality
-        function showTab(tabId) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabId).classList.add('active');
-            
-            // Add active class to clicked button
-            event.currentTarget.classList.add('active');
-        }
-        
-        // Load cart from localStorage on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            loadCartFromStorage();
-        });
+// Image slider functionality
+let currentSlide = 0;
+const slider = document.getElementById('productSlider');
+const sliderNav = document.getElementById('sliderNav');
+const slides = document.querySelectorAll('.slide');
 
-        // Save cart to localStorage
-        function saveCartToStorage() {
-            localStorage.setItem('cart', JSON.stringify(cart));
-            localStorage.setItem('totalAmount', totalAmount);
+// Create slider dots
+for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => {
+        goToSlide(i);
+    };
+    sliderNav.appendChild(dot);
+}
+
+function goToSlide(n) {
+    currentSlide = n;
+    updateSlider();
+}
+
+function updateSlider() {
+    slider.style.transform = `translateX(${-currentSlide * 100}%)`;
+    
+    // Update dots
+    const dots = document.querySelectorAll('.slider-dot');
+    dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
         }
+    });
+}
 
-        // Load cart from localStorage
-        function loadCartFromStorage() {
-            const savedCart = localStorage.getItem('cart');
-            const savedTotal = localStorage.getItem('totalAmount');
-            
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-                totalAmount = savedTotal ? parseFloat(savedTotal) : 0;
-                updateCartUI();
-            }
-        }
+document.getElementById('sliderLeft').addEventListener('click', () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlider();
+});
 
-        // Toggle cart dropdown
-        document.getElementById('cartButton').addEventListener('click', function() {
-            document.getElementById('cartDropdown').classList.toggle('show');
-        });
+document.getElementById('sliderRight').addEventListener('click', () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlider();
+});
 
-        // Close dropdown when clicking outside
-        window.addEventListener('click', function(event) {
-            if (!event.target.closest('#cartButton') && !event.target.closest('#cartDropdown')) {
-                document.getElementById('cartDropdown').classList.remove('show');
-            }
-        });
+// Tab functionality
+function showTab(tabId) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Remove active class from all buttons
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Show selected tab
+    document.getElementById(tabId).classList.add('active');
+    
+    // Add active class to clicked button
+    event.currentTarget.classList.add('active');
+}
 
-        function addToCart(productId) {
-            if (productId === currentProduct.id) {
-                // Check if product already exists in cart
-                const existingItemIndex = cart.findIndex(item => item.id === productId);
-                
-                if (existingItemIndex >= 0) {
-                    // Increase quantity if product already in cart
-                    cart[existingItemIndex].quantity += 1;
-                } else {
-                    // Add new product to cart
-                    cart.push({ 
-                        id: currentProduct.id,
-                        name: currentProduct.name, 
-                        price: currentProduct.price, 
-                        link: currentProduct.buyLink,
-                        quantity: 1
-                    });
-                }
-                
-                totalAmount += currentProduct.price;
-                updateCartUI();
-                saveCartToStorage();
-                
-                // Show feedback
-                alert('Produk ditambahkan ke keranjang!');
-            }
-        }
-        
-        function removeFromCart(index) {
-            const item = cart[index];
-            totalAmount -= (item.price * item.quantity);
-            
-            // Remove item from cart
-            cart.splice(index, 1);
-            
-            updateCartUI();
-            saveCartToStorage();
-        }
+// Load product info when page loads
+window.addEventListener('DOMContentLoaded', function() {
+    // Set product info
+    document.getElementById('productName').textContent = currentProduct.name;
+    document.getElementById('productPrice').textContent = `Rp ${currentProduct.price.toLocaleString()}`;
+    document.getElementById('productOriginalPrice').textContent = `Rp ${currentProduct.originalPrice.toLocaleString()}`;
+    document.getElementById('productRating').textContent = currentProduct.rating;
+    document.getElementById('productSold').textContent = `${currentProduct.sold} Terjual`;
+    document.getElementById('productLocation').textContent = currentProduct.location;
+});
 
-        function updateCartUI() {
-            // Update cart count - count total quantity
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cartCount').textContent = totalItems;
+// Bottom Nav Buttons Function
+// Function for store button
+document.querySelector('.ri-store-2-line').parentElement.addEventListener('click', function() {
+    window.location.href = '#toko';
+    alert('Membuka halaman toko');
+});
 
-            // Update cart items
-            const cartItems = document.getElementById('cartItems');
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-gray-500 text-center py-2">Keranjang belanja kosong</p>';
-            } else {
-                cart.forEach((item, index) => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'flex justify-between items-center py-2';
-                    itemElement.innerHTML = `
-                        <div class="flex items-center flex-1">
-                            <input type="checkbox" id="item${index}" class="mr-2 checkout-select">
-                            <div class="text-sm">
-                                <span class="text-gray-600">${item.name}</span>
-                                <div class="flex items-center text-xs text-gray-500">
-                                    <span>Rp ${item.price.toLocaleString()} × ${item.quantity}</span>
+// Function for customer service button
+document.querySelector('.ri-customer-service-2-line').parentElement.addEventListener('click', function() {
+    window.location.href = '#cs';
+    alert('Menghubungi layanan pelanggan');
+});
+
+// Duration selection popup
+const buyNowButton = document.getElementById('buyNowButton');
+buyNowButton.addEventListener('click', function() {
+    showDurationPopup();
+});
+
+// Definisi harga dan durasi
+const durationOptions = [
+    { duration: "1 Bulan", days: 30, price: 3000 },
+    { duration: "3 Bulan", days: 90, price: 8500 },
+    { duration: "6 Bulan", days: 180, price: 16000 },
+    { duration: "1 Tahun", days: 365, price: 30000 }
+];
+
+let selectedDurationIndex = 0; // Default ke opsi pertama
+
+function showDurationPopup() {
+    // Create popup container if it doesn't exist
+    if (!document.getElementById('durationPopup')) {
+        const popupHTML = `
+            <div id="durationPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end justify-center">
+                <div class="bg-white w-full max-w-md rounded-t-xl p-5 transform transition-transform duration-300" style="transform: translateY(100%)">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Pilih Durasi Berlangganan</h3>
+                        <button id="closeDurationBtn" class="text-gray-500">
+                            <i class="ri-close-line text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6" id="durationOptionsContainer">
+                        ${durationOptions.map((option, index) => `
+                            <div class="border border-gray-200 rounded-lg p-3 flex justify-between items-center duration-option ${index === 0 ? 'border-pink-500 bg-pink-50' : ''}" data-index="${index}">
+                                <div>
+                                    <h4 class="font-medium">${option.duration}</h4>
+                                    <p class="text-sm text-gray-600">Akses Premium ${option.days} hari</p>
                                 </div>
+                                <div class="text-pink-500 font-semibold">Rp ${option.price.toLocaleString()}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <button id="payNowBtn" class="w-full bg-pink-500 text-white py-3 rounded-lg font-medium">
+                        Bayar Sekarang
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        const popupDiv = document.createElement('div');
+        popupDiv.innerHTML = popupHTML;
+        document.body.appendChild(popupDiv.firstElementChild);
+        
+        // Animation to show the popup
+        setTimeout(() => {
+            document.querySelector('#durationPopup > div').style.transform = 'translateY(0)';
+        }, 10);
+        
+        // Add event listeners
+        document.getElementById('closeDurationBtn').addEventListener('click', hideDurationPopup);
+        
+        // Add event listeners to duration options
+        const optionsContainer = document.getElementById('durationOptionsContainer');
+        optionsContainer.addEventListener('click', function(e) {
+            const option = e.target.closest('.duration-option');
+            if (option) {
+                // Remove selected class from all options
+                document.querySelectorAll('.duration-option').forEach(opt => 
+                    opt.classList.remove('border-pink-500', 'bg-pink-50'));
+                
+                // Add selected class to clicked option
+                option.classList.add('border-pink-500', 'bg-pink-50');
+                
+                // Update selected index
+                selectedDurationIndex = parseInt(option.dataset.index);
+            }
+        });
+        
+        // Add event listener to Pay Now button
+        document.getElementById('payNowBtn').addEventListener('click', function() {
+            hideDurationPopup();
+            showPaymentPopup();
+        });
+    } else {
+        // Show existing popup
+        document.getElementById('durationPopup').style.display = 'flex';
+        setTimeout(() => {
+            document.querySelector('#durationPopup > div').style.transform = 'translateY(0)';
+        }, 10);
+    }
+}
+
+function hideDurationPopup() {
+    const popup = document.querySelector('#durationPopup > div');
+    popup.style.transform = 'translateY(100%)';
+    setTimeout(() => {
+        document.getElementById('durationPopup').style.display = 'none';
+    }, 300);
+}
+
+function showPaymentPopup() {
+    // Create payment popup if it doesn't exist
+    if (!document.getElementById('paymentPopup')) {
+        const paymentHTML = `
+            <div id="paymentPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white w-full max-w-md rounded-xl p-5 m-4 transform transition-transform duration-300 scale-95 opacity-0">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Metode Pembayaran</h3>
+                        <button id="closePaymentBtn" class="text-gray-500">
+                            <i class="ri-close-line text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600">Produk</span>
+                            <span>Canva Premium</span>
+                        </div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600">Durasi</span>
+                            <span id="selectedDuration"></span>
+                        </div>
+                        <div class="flex justify-between font-semibold">
+                            <span>Total Pembayaran</span>
+                            <span class="text-pink-500" id="totalPayment"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-medium mb-3">Pilih Metode Pembayaran:</h4>
+                        
+                        <div class="space-y-3">
+                            <div class="border border-gray-200 rounded-lg p-3 flex items-center payment-option">
+                                <input type="radio" name="payment" id="bca" class="mr-3">
+                                <label for="bca" class="flex items-center justify-between w-full">
+                                    <span>Bank BCA</span>
+                                    <img src="/api/placeholder/60/30" alt="BCA" class="h-6">
+                                </label>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3 flex items-center payment-option">
+                                <input type="radio" name="payment" id="mandiri" class="mr-3">
+                                <label for="mandiri" class="flex items-center justify-between w-full">
+                                    <span>Bank Mandiri</span>
+                                    <img src="/api/placeholder/60/30" alt="Mandiri" class="h-6">
+                                </label>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3 flex items-center payment-option">
+                                <input type="radio" name="payment" id="gopay" class="mr-3">
+                                <label for="gopay" class="flex items-center justify-between w-full">
+                                    <span>GoPay</span>
+                                    <img src="/api/placeholder/60/30" alt="GoPay" class="h-6">
+                                </label>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3 flex items-center payment-option">
+                                <input type="radio" name="payment" id="ovo" class="mr-3">
+                                <label for="ovo" class="flex items-center justify-between w-full">
+                                    <span>OVO</span>
+                                    <img src="/api/placeholder/60/30" alt="OVO" class="h-6">
+                                </label>
                             </div>
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-sm font-semibold mr-2">Rp ${(item.price * item.quantity).toLocaleString()}</span>
-                            <i class="ri-delete-bin-line text-gray-400 remove-item" onclick="removeFromCart(${index})"></i>
-                        </div>
-                    `;
-                    cartItems.appendChild(itemElement);
-                });
-            }
-
-            // Update total
-            document.getElementById('cartTotal').textContent = `Rp ${totalAmount.toLocaleString()}`;
-        }
-
-        function showCheckoutDetails() {
-            const selectedItems = document.querySelectorAll('.checkout-select:checked');
-            if (selectedItems.length === 0) {
-                alert('Pilih minimal satu item untuk checkout');
-                return;
-            }
-
-            const checkoutItems = document.getElementById('checkoutItems');
-            checkoutItems.innerHTML = '';
-
-            selectedItems.forEach(checkbox => {
-                const index = parseInt(checkbox.id.replace('item', ''));
-                const item = cart[index];
-                
-                const itemElement = document.createElement('div');
-                itemElement.className = 'border-b pb-4';
-                itemElement.innerHTML = `
-                    <h4 class="font-semibold mb-2">${item.name}</h4>
-                    <p class="text-gray-600 mb-2">Harga: Rp ${item.price.toLocaleString()} × ${item.quantity}</p>
-                    <p class="text-gray-600 mb-2">Subtotal: Rp ${(item.price * item.quantity).toLocaleString()}</p>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <label class="mr-2">Jumlah:</label>
-                            <input type="number" min="1" value="${item.quantity}" 
-                                   onchange="updateCheckoutQuantity(${index}, this.value)" 
-                                   class="w-16 border rounded px-2 py-1">
-                        </div>
-                        <a href="${item.link}" target="_blank" 
-                           class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition-colors">
-                            Beli Sekarang
-                        </a>
                     </div>
-                `;
-                checkoutItems.appendChild(itemElement);
-            });
-
-            document.getElementById('checkoutDetails').classList.add('show');
-        }
+                    
+                    <button id="confirmPaymentBtn" class="w-full bg-pink-500 text-white py-3 rounded-lg font-medium">
+                        Konfirmasi Pembayaran
+                    </button>
+                </div>
+            </div>
+        `;
         
-        function updateCheckoutQuantity(index, quantity) {
-            quantity = parseInt(quantity);
-            if (isNaN(quantity) || quantity < 1) {
-                quantity = 1;
-            }
-            
-            const item = cart[index];
-            const oldQuantity = item.quantity;
-            
-            // Update quantity and total
-            item.quantity = quantity;
-            totalAmount += (quantity - oldQuantity) * item.price;
-            
-            updateCartUI();
-            saveCartToStorage();
-        }
+        const paymentDiv = document.createElement('div');
+        paymentDiv.innerHTML = paymentHTML;
+        document.body.appendChild(paymentDiv.firstElementChild);
+        
+        // Animation to show the popup
+        setTimeout(() => {
+            const paymentModal = document.querySelector('#paymentPopup > div');
+            paymentModal.style.transform = 'scale(1)';
+            paymentModal.style.opacity = '1';
+        }, 10);
+        
+        // Add event listeners
+        document.getElementById('closePaymentBtn').addEventListener('click', hidePaymentPopup);
+        
+        // Add event listeners to payment options
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+            });
+        });
+        
+        // Add event listener to Confirm Payment button
+        document.getElementById('confirmPaymentBtn').addEventListener('click', function() {
+            hidePaymentPopup();
+            alert('Pembayaran berhasil! Terima kasih telah berlangganan Canva Premium.');
+        });
+    } else {
+        // Show existing popup
+        document.getElementById('paymentPopup').style.display = 'flex';
+        setTimeout(() => {
+            const paymentModal = document.querySelector('#paymentPopup > div');
+            paymentModal.style.transform = 'scale(1)';
+            paymentModal.style.opacity = '1';
+        }, 10);
+    }
+    
+    // Update selected duration and payment berdasarkan pilihan di popup sebelumnya
+    const selectedOption = durationOptions[selectedDurationIndex];
+    document.getElementById('selectedDuration').textContent = selectedOption.duration;
+    document.getElementById('totalPayment').textContent = `Rp ${selectedOption.price.toLocaleString()}`;
+}
 
-        function hideCheckoutDetails() {
-            document.getElementById('checkoutDetails').classList.remove('show');
-        }
+function hidePaymentPopup() {
+    const paymentModal = document.querySelector('#paymentPopup > div');
+    paymentModal.style.transform = 'scale(0.95)';
+    paymentModal.style.opacity = '0';
+    setTimeout(() => {
+        document.getElementById('paymentPopup').style.display = 'none';
+    }, 300);
+}
     </script>
 </body>
-</html>
+    </html>
