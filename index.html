@@ -33,11 +33,12 @@
             display: block;
         }
         
-        /* Memperbaiki sudut gambar agar tidak lancip */
-        .product-image {
-            border-radius: 8px;
-            overflow: hidden;
-        }
+        <!-- Dalam style tag, update class .product-image -->
+.product-image {
+    border-radius: 8px;
+    overflow: hidden;
+    height: 120px; /* Diperkecil dari 160px menjadi 120px */
+}
         
         .remove-item {
             cursor: pointer;
@@ -120,6 +121,7 @@
         .footer-link {
             font-size: 0.95rem; /* Font link footer lebih besar */
         }
+        
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
@@ -195,6 +197,25 @@
             <!-- Products will be loaded dynamically from products.js -->
         </div>
     </div>
+    
+    <!-- Tambahkan ini sebelum <div id="productGrid"> -->
+<div id="promoSection" class="mb-6 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg p-4 text-white">
+    <div class="flex justify-between items-center">
+        <div>
+            <h2 class="text-xl font-bold mb-2">Promo Spesial Ramadhan</h2>
+            <p class="text-sm mb-3">Diskon hingga 30% untuk semua produk</p>
+            <div id="countdown" class="text-2xl font-bold mb-3">
+                00:00:00
+            </div>
+            <a href="#" class="bg-white text-pink-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+                Belanja Sekarang
+            </a>
+        </div>
+        <div class="text-4xl">
+            <i class="ri-discount-percent-line"></i>
+        </div>
+    </div>
+</div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -389,6 +410,37 @@
         function hideCheckoutDetails() {
             document.getElementById('checkoutDetails').classList.remove('show');
         }
+            // Tambahkan di script bagian akhir untuk countdown
+    function startCountdown() {
+        const countdownEl = document.getElementById('countdown');
+        const endTime = new Date();
+        endTime.setHours(23, 59, 59, 999); // Akhir hari ini
+
+        function updateCountdown() {
+            const now = new Date();
+            const difference = endTime - now;
+
+            if (difference > 0) {
+                const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((difference / 1000 / 60) % 60);
+                const seconds = Math.floor((difference / 1000) % 60);
+
+                countdownEl.textContent = 
+                    `${hours.toString().padStart(2, '0')}:` +
+                    `${minutes.toString().padStart(2, '0')}:` +
+                    `${seconds.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(countdownInterval);
+                countdownEl.textContent = "Promo Berakhir!";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Panggil segera untuk menghindari delay
+    }
+
+    // Jalankan countdown saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', startCountdown);
     </script>
 </body>
-    </html>
+        </html>
