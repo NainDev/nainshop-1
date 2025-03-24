@@ -3,11 +3,11 @@ const products = [
     {
         id: 1,
         category: "Aplikasi",
-        name: "Canva Premium 1 Bulan | Garansi full",
+        name: "[ 🔥 Spesial Promo ] Canva Premium | Harga Murah, Garansi Full",
         price: 5000,
         image: "/img/canva.jpg",
-        detailLink: "https://www.nainshop.biz.id/details/tws.html",
-        buyLink: "https://vt.tokopedia.com/t/ZSMBoyX2x/",
+        detailLink: "https://www.nainshop.biz.id/detail/canva-pro-murah",
+        buyLink: "https://wa.me/6288223674569",
         discount: 2000,
         rating: 4.5,
         sold: 10
