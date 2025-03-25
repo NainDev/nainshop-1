@@ -74,10 +74,10 @@ const products = [
         }, 
     {
         id: 7,
-        category: "Celana",
-        name: "Celana panjang jeans washed loose fit pria",
+        category: "Aplikasi",
+        name: "ALIGH MOTION",
         price: 85000,
-        image: "/img/wattpad.jpg",
+        image: "/img/am.jpg",
         detailLink: "/product/celana-code-1",
         buyLink: "https://vt.tokopedia.com/t/ZSMAvGNBN/",
         discount: 0,
