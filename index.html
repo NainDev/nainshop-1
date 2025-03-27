@@ -15,7 +15,7 @@
             background-color: #f8f9fa;
             max-width: 768px;
             margin: 0 auto;
-            font-size: 16px; /* Ukuran font dasar lebih besar */
+            font-size: 14px; /* Diperkecil ukuran font dasar */
         }
 
         .product-title {
@@ -23,6 +23,7 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            height: 2.6rem; /* Tinggi judul lebih pendek */
         }
 
         .checkout-details {
@@ -33,12 +34,11 @@
             display: block;
         }
         
-        <!-- Dalam style tag, update class .product-image -->
-.product-image {
-    border-radius: 8px;
-    overflow: hidden;
-    height: 120px; /* Diperkecil dari 160px menjadi 120px */
-}
+        .product-image {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 100px; /* Diperkecil dari 120px menjadi 100px */
+        }
         
         .remove-item {
             cursor: pointer;
@@ -49,7 +49,6 @@
             color: #e53e3e;
         }
 
-        /* Sidebar Navbar Styles */
         .sidebar {
             position: fixed;
             top: 0;
@@ -81,89 +80,90 @@
             display: block;
         }
 
-        /* Product Card Animation */
         .product-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(1.02); /* Efek hover lebih halus */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
         
-        /* Footer styles */
         .footer {
             background-color: #f8f8f8;
             border-top: 1px solid #e5e5e5;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
+            padding: 1rem 0; /* Diperkecil padding */
+            margin-top: 1rem; /* Diperkecil margin */
         }
 
-        /* Memperbesar ukuran font dan elemen */
         .nav-link {
-            font-size: 1.1rem; /* Font menu lebih besar */
+            font-size: 0.95rem; /* Font menu lebih kecil */
         }
 
         .search-input {
-            font-size: 1.1rem; /* Font pencarian lebih besar */
-            padding: 0.6rem 1rem; /* Padding lebih besar */
+            font-size: 0.95rem; /* Font pencarian lebih kecil */
+            padding: 0.5rem 0.8rem; /* Padding lebih kecil */
         }
 
         .btn {
-            font-size: 1rem; /* Font tombol lebih besar */
-            padding: 0.6rem 1.2rem; /* Padding tombol lebih besar */
+            font-size: 0.9rem; /* Font tombol lebih kecil */
+            padding: 0.5rem 1rem; /* Padding tombol lebih kecil */
         }
 
         .footer-heading {
-            font-size: 1.1rem; /* Font judul footer lebih besar */
+            font-size: 1rem; /* Font judul footer lebih kecil */
         }
 
         .footer-link {
-            font-size: 0.95rem; /* Font link footer lebih besar */
+            font-size: 0.85rem; /* Font link footer lebih kecil */
         }
-        
+
+        /* Gradien untuk promo section */
+        .promo-gradient {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
     <!-- Sidebar Navbar -->
     <div id="sidebar" class="sidebar">
         <div class="p-4">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800">Nain Shop</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">Nain Shop</h2>
                 <button id="closeNavbar" class="text-gray-500 hover:text-gray-700">
-                    <i class="ri-close-line text-2xl"></i>
+                    <i class="ri-close-line text-xl"></i>
                 </button>
             </div>
             
             <!-- Search Bar in Navbar -->
-            <div class="mb-6">
+            <div class="mb-4">
                 <div class="relative">
                     <input type="text" 
                         id="searchInput"
                         placeholder="Cari produk..." 
-                        class="w-full bg-gray-100 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300 search-input">
-                    <button id="searchButton" class="absolute right-3 top-3.5 text-gray-500">
-                        <i class="ri-search-line text-xl"></i>
+                        class="w-full bg-gray-100 rounded-lg px-3 py-2 pr-9 focus:outline-none focus:ring-2 focus:ring-pink-300 search-input">
+                    <button id="searchButton" class="absolute right-2 top-2.5 text-gray-500">
+                        <i class="ri-search-line text-lg"></i>
                     </button>
                 </div>
             </div>
             
             <!-- Navigation Links -->
-            <nav class="space-y-5">
-                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
-                    <i class="ri-home-4-line text-xl"></i>
+            <nav class="space-y-4">
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-home-4-line text-lg"></i>
                     <span>Beranda</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
-                    <i class="ri-grid-line text-xl"></i>
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-grid-line text-lg"></i>
                     <span>Kategori</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
-                    <i class="ri-heart-line text-xl"></i>
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-heart-line text-lg"></i>
                     <span>Favorit</span>
                 </a>
-                <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-pink-500 nav-link">
-                    <i class="ri-user-line text-xl"></i>
+                <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-pink-500 nav-link">
+                    <i class="ri-user-line text-lg"></i>
                     <span>Akun</span>
                 </a>
             </nav>
@@ -176,86 +176,84 @@
     <!-- Top Navbar -->
     <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
         <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-center h-16 px-4">
+            <div class="flex justify-between items-center h-14 px-4">
                 <button id="openNavbar" class="text-gray-600">
-                    <i class="ri-menu-line text-2xl"></i>
+                    <i class="ri-menu-line text-xl"></i>
                 </button>
-                <!-- Replaced text with image logo -->
-                <a href="/" class="h-10">
+                <a href="/" class="h-8">
                     <img src="/img/logo.png" alt="NainShop" class="h-full">
                 </a>
-                <!-- Menghilangkan ikon keranjang -->
-                <div class="w-6"></div> <!-- Spacer untuk menjaga layout -->
+                <div class="w-5"></div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <div class="mt-20 px-4">
+    <div class="mt-16 px-4">
+        <!-- Promo Section -->
+        <div id="promoSection" class="mb-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg p-3 text-white">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-base font-bold mb-1">Promo Spesial Ramadhan</h2>
+                    <p class="text-xs mb-2">Diskon hingga 30% untuk semua produk</p>
+                    <div id="countdown" class="text-lg font-bold mb-2">
+                        00:00:00
+                    </div>
+                    <a href="#" class="bg-white text-pink-600 px-3 py-1.5 rounded-lg hover:bg-gray-100 transition text-xs">
+                        Belanja Sekarang
+                    </a>
+                </div>
+                <div class="text-2xl">
+                    <i class="ri-discount-percent-line"></i>
+                </div>
+            </div>
+        </div>
+
         <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-2 gap-4">
+        <div id="productGrid" class="grid grid-cols-2 gap-3">
             <!-- Products will be loaded dynamically from products.js -->
         </div>
     </div>
     
-    <!-- Tambahkan ini sebelum <div id="productGrid"> -->
-<div id="promoSection" class="mb-6 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg p-4 text-white">
-    <div class="flex justify-between items-center">
-        <div>
-            <h2 class="text-xl font-bold mb-2">Promo Spesial Ramadhan</h2>
-            <p class="text-sm mb-3">Diskon hingga 30% untuk semua produk</p>
-            <div id="countdown" class="text-2xl font-bold mb-3">
-                00:00:00
-            </div>
-            <a href="#" class="bg-white text-pink-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
-                Belanja Sekarang
-            </a>
-        </div>
-        <div class="text-4xl">
-            <i class="ri-discount-percent-line"></i>
-        </div>
-    </div>
-</div>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div>
-                    <h4 class="text-base font-semibold mb-3 footer-heading">Layanan Pelanggan</h4>
-                    <ul class="text-sm space-y-2 text-gray-600">
+                    <h4 class="text-sm font-semibold mb-2 footer-heading">Layanan Pelanggan</h4>
+                    <ul class="text-xs space-y-1 text-gray-600">
                         <li><a href="#" class="hover:text-pink-500 footer-link">Bantuan</a></li>
                         <li><a href="#" class="hover:text-pink-500 footer-link">Cara Berbelanja</a></li>
                         <li><a href="#" class="hover:text-pink-500 footer-link">Pengiriman</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-base font-semibold mb-3 footer-heading">Tentang Kami</h4>
-                    <ul class="text-sm space-y-2 text-gray-600">
+                    <h4 class="text-sm font-semibold mb-2 footer-heading">Tentang Kami</h4>
+                    <ul class="text-xs space-y-1 text-gray-600">
                         <li><a href="#" class="hover:text-pink-500 footer-link">Profil</a></li>
                         <li><a href="#" class="hover:text-pink-500 footer-link">Syarat & Ketentuan</a></li>
                         <li><a href="#" class="hover:text-pink-500 footer-link">Kebijakan Privasi</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-base font-semibold mb-3 footer-heading">Ikuti Kami</h4>
-                    <div class="flex space-x-4 text-gray-600">
-                        <a href="#" class="hover:text-pink-500"><i class="ri-instagram-line text-xl"></i></a>
-                        <a href="#" class="hover:text-pink-500"><i class="ri-facebook-circle-line text-xl"></i></a>
-                        <a href="#" class="hover:text-pink-500"><i class="ri-twitter-line text-xl"></i></a>
+                    <h4 class="text-sm font-semibold mb-2 footer-heading">Ikuti Kami</h4>
+                    <div class="flex space-x-3 text-gray-600">
+                        <a href="#" class="hover:text-pink-500"><i class="ri-instagram-line text-lg"></i></a>
+                        <a href="#" class="hover:text-pink-500"><i class="ri-facebook-circle-line text-lg"></i></a>
+                        <a href="#" class="hover:text-pink-500"><i class="ri-twitter-line text-lg"></i></a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-base font-semibold mb-3 footer-heading">Hubungi Kami</h4>
-                    <p class="text-sm text-gray-600 footer-link">
+                    <h4 class="text-sm font-semibold mb-2 footer-heading">Hubungi Kami</h4>
+                    <p class="text-xs text-gray-600 footer-link">
                         <i class="ri-mail-line mr-1"></i> nainshop@biz.id
                     </p>
-                    <p class="text-sm text-gray-600 mt-1 footer-link">
+                    <p class="text-xs text-gray-600 mt-1 footer-link">
                         <i class="ri-phone-line mr-1"></i> 0838-7460-7050
                     </p>
                 </div>
             </div>
-            <div class="mt-6 pt-4 border-t border-gray-200 text-center text-sm text-gray-500">
+            <div class="mt-4 pt-3 border-t border-gray-200 text-center text-xs text-gray-500">
                 © 2025 NainShop. Semua hak dilindungi.
             </div>
         </div>
@@ -264,14 +262,14 @@
     <!-- Checkout Details Modal -->
     <div id="checkoutDetails" class="checkout-details fixed inset-0 bg-black bg-opacity-50 z-50">
         <div class="bg-white max-w-md mx-auto mt-20 rounded-lg shadow-lg">
-            <div class="p-5">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-semibold text-xl">Detail Checkout</h3>
+            <div class="p-4">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold text-lg">Detail Checkout</h3>
                     <button onclick="hideCheckoutDetails()" class="text-gray-500 hover:text-gray-700">
-                        <i class="ri-close-line text-2xl"></i>
+                        <i class="ri-close-line text-xl"></i>
                     </button>
                 </div>
-                <div id="checkoutItems" class="space-y-4">
+                <div id="checkoutItems" class="space-y-3">
                     <!-- Checkout items will be displayed here -->
                 </div>
             </div>
@@ -357,13 +355,13 @@
             productGrid.innerHTML = '';
             
             if (productList.length === 0) {
-                productGrid.innerHTML = '<div class="col-span-2 text-center py-8 text-gray-500 text-base">Tidak ada produk yang ditemukan</div>';
+                productGrid.innerHTML = '<div class="col-span-2 text-center py-6 text-gray-500 text-sm">Tidak ada produk yang ditemukan</div>';
                 return;
             }
             
             productList.forEach(product => {
                 const productElement = document.createElement('div');
-                productElement.className = 'product-card bg-white rounded-lg shadow overflow-hidden';
+                productElement.className = 'product-card bg-white rounded-lg shadow-sm overflow-hidden';
                 
                 // Menghitung harga setelah potongan
                 const finalPrice = product.discount ? product.price - product.discount : product.price;
@@ -371,32 +369,32 @@
                 productElement.innerHTML = `
                     <div class="relative">
                         <div class="product-image">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-40 object-cover">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-4">
-                            <h3 class="product-title text-base font-semibold text-gray-800 mb-2">${product.name}</h3>
-                            <div class="flex flex-col mb-3">
+                        <div class="p-3">
+                            <h3 class="product-title text-xs font-semibold text-gray-800 mb-1">${product.name}</h3>
+                            <div class="flex flex-col mb-2">
                                 ${product.discount ? 
-                                    `<span class="text-gray-500 text-sm line-through">Rp ${product.price.toLocaleString()}</span>
+                                    `<span class="text-gray-400 text-xs line-through">Rp ${product.price.toLocaleString()}</span>
                                      <div class="flex items-center">
-                                        <span class="text-pink-500 font-semibold text-lg">Rp ${finalPrice.toLocaleString()}</span>
-                                        <span class="text-sm text-green-600 ml-2">-Rp ${product.discount.toLocaleString()}</span>
+                                        <span class="text-pink-500 font-semibold text-sm">Rp ${finalPrice.toLocaleString()}</span>
+                                        <span class="text-xs text-green-600 ml-1">-Rp ${product.discount.toLocaleString()}</span>
                                      </div>` 
                                     : 
-                                    `<span class="text-pink-500 font-semibold text-lg">Rp ${finalPrice.toLocaleString()}</span>`
+                                    `<span class="text-pink-500 font-semibold text-sm">Rp ${finalPrice.toLocaleString()}</span>`
                                 }
                             </div>
-                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <div class="flex items-center text-xs text-gray-500 mb-2">
                                 <i class="ri-star-fill text-yellow-400 mr-1"></i>
                                 <span>${product.rating || (Math.random() * 2 + 3).toFixed(1)}</span>
                                 <span class="mx-1">|</span>
                                 <span>Terjual ${product.sold || Math.floor(Math.random() * 500) + 50}</span>
                             </div>
-                            <div class="flex space-x-2">
-                                <a href="${product.detailLink}" class="flex-1 bg-gray-200 text-gray-700 text-base rounded-lg py-2.5 hover:bg-gray-300 transition-colors text-center">
+                            <div class="flex space-x-1.5">
+                                <a href="${product.detailLink}" class="flex-1 bg-gray-200 text-gray-700 text-xs rounded-lg py-2 hover:bg-gray-300 transition-colors text-center">
                                     Detail
                                 </a>
-                                <a href="${product.buyLink}" class="flex-1 bg-pink-500 text-white text-base rounded-lg py-2.5 hover:bg-pink-600 transition-colors text-center">
+                                <a href="${product.buyLink}" class="flex-1 bg-pink-500 text-white text-xs rounded-lg py-2 hover:bg-pink-600 transition-colors text-center">
                                     Beli
                                 </a>
                             </div>
@@ -410,37 +408,38 @@
         function hideCheckoutDetails() {
             document.getElementById('checkoutDetails').classList.remove('show');
         }
-            // Tambahkan di script bagian akhir untuk countdown
-    function startCountdown() {
-        const countdownEl = document.getElementById('countdown');
-        const endTime = new Date();
-        endTime.setHours(23, 59, 59, 999); // Akhir hari ini
 
-        function updateCountdown() {
-            const now = new Date();
-            const difference = endTime - now;
+        // Countdown function
+        function startCountdown() {
+            const countdownEl = document.getElementById('countdown');
+            const endTime = new Date();
+            endTime.setHours(23, 59, 59, 999);
 
-            if (difference > 0) {
-                const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-                const minutes = Math.floor((difference / 1000 / 60) % 60);
-                const seconds = Math.floor((difference / 1000) % 60);
+            function updateCountdown() {
+                const now = new Date();
+                const difference = endTime - now;
 
-                countdownEl.textContent = 
-                    `${hours.toString().padStart(2, '0')}:` +
-                    `${minutes.toString().padStart(2, '0')}:` +
-                    `${seconds.toString().padStart(2, '0')}`;
-            } else {
-                clearInterval(countdownInterval);
-                countdownEl.textContent = "Promo Berakhir!";
+                if (difference > 0) {
+                    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((difference / 1000 / 60) % 60);
+                    const seconds = Math.floor((difference / 1000) % 60);
+
+                    countdownEl.textContent = 
+                        `${hours.toString().padStart(2, '0')}:` +
+                        `${minutes.toString().padStart(2, '0')}:` +
+                        `${seconds.toString().padStart(2, '0')}`;
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownEl.textContent = "Promo Berakhir!";
+                }
             }
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown();
         }
 
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Panggil segera untuk menghindari delay
-    }
-
-    // Jalankan countdown saat halaman dimuat
-    window.addEventListener('DOMContentLoaded', startCountdown);
+        // Jalankan countdown saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', startCountdown);
     </script>
 </body>
-        </html>
+                    </html>
