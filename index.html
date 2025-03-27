@@ -82,6 +82,7 @@
 
         .product-card {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: calc(50% - 0.75rem); /* Tambahan untuk membatasi lebar produk */
         }
 
         .product-card:hover {
@@ -121,6 +122,28 @@
         /* Gradien untuk promo section */
         .promo-gradient {
             background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -173,6 +196,11 @@
     <!-- Overlay for sidebar -->
     <div id="overlay" class="overlay"></div>
 
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6283874607050" target="_blank" class="whatsapp-float">
+        <i class="ri-whatsapp-line text-2xl"></i>
+    </a>
+
     <!-- Top Navbar -->
     <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
         <div class="max-w-7xl mx-auto">
@@ -210,7 +238,7 @@
         </div>
 
         <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-2 gap-3">
+        <div id="productGrid" class="flex flex-wrap justify-between gap-3">
             <!-- Products will be loaded dynamically from products.js -->
         </div>
     </div>
@@ -355,15 +383,14 @@
             productGrid.innerHTML = '';
             
             if (productList.length === 0) {
-                productGrid.innerHTML = '<div class="col-span-2 text-center py-6 text-gray-500 text-sm">Tidak ada produk yang ditemukan</div>';
+                productGrid.innerHTML = '<div class="w-full text-center py-6 text-gray-500 text-sm">Tidak ada produk yang ditemukan</div>';
                 return;
             }
             
             productList.forEach(product => {
                 const productElement = document.createElement('div');
-                productElement.className = 'product-card bg-white rounded-lg shadow-sm overflow-hidden';
+                productElement.className = 'product-card bg-white rounded-lg shadow-sm overflow-hidden mb-3';
                 
-                // Menghitung harga setelah potongan
                 const finalPrice = product.discount ? product.price - product.discount : product.price;
                 
                 productElement.innerHTML = `
@@ -442,4 +469,4 @@
         window.addEventListener('DOMContentLoaded', startCountdown);
     </script>
 </body>
-                    </html>
+                                </html>
