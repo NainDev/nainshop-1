@@ -588,83 +588,151 @@ function hideDurationPopup() {
 }
 
 function showPaymentPopup() {
-    // Create payment popup if it doesn't exist
-    if (!document.getElementById('paymentPopup')) {
-        const selectedOption = durationOptions[selectedDurationIndex];
-        // Ubah ke metode pembayaran QRIS
-        const paymentHTML = `
-            <div id="paymentPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-y-auto">
-                <div class="bg-white w-full max-w-md rounded-xl p-5 m-4 transform transition-transform duration-300 scale-95 opacity-0" style="max-height: 90vh; overflow-y: auto;">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-semibold">Metode Pembayaran</h3>
-                        <button id="closePaymentBtn" class="text-gray-500">
-                            <i class="ri-close-line text-xl"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
-                        <div class="flex justify-between text-sm mb-2">
-                            <span class="text-gray-600">Produk</span>
-                            <span>Canva Premium</span>
-                        </div>
-                        <div class="flex justify-between text-sm mb-2">
-                            <span class="text-gray-600">Durasi</span>
-                            <span id="selectedDuration">${selectedOption.duration}</span>
-                        </div>
-                        <div class="flex justify-between font-semibold">
-                            <span>Total Pembayaran</span>
-                            <span class="text-pink-500" id="totalPayment">Rp ${selectedOption.price.toLocaleString()}</span>
-                        </div>
-                    </div>
-                    
-                    <form id="paymentForm" action="https://formspree.io/f/mrbpkyyk" method="POST" class="mb-6">
-                        <div class="mb-4">
-                            <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">Nomor WhatsApp <span class="text-red-500">*</span></label>
-                            <input type="tel" id="whatsapp" name="whatsapp" required 
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-                                placeholder="Contoh: 628123456789">
-                        </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
-                            <input type="email" id="email" name="email" required 
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-                                placeholder="Contoh: email@domain.com">
-                        </div>
-                        <input type="hidden" name="product" value="Canva Premium">
-                        <input type="hidden" name="duration" value="${selectedOption.duration}">
-                        <input type="hidden" name="price" value="${selectedOption.price}">
-                        
-                        <div class="mb-6">
-                            <h4 class="font-medium mb-3">Metode Pembayaran QRIS:</h4>
-                            
-                            <div class="border border-gray-200 rounded-lg p-4 flex flex-col items-center">
-                                <img src="https://tmpfiles.org/dl/22936558/1742827158717ueeapnyfow.png" alt="QRIS Code" class="mb-4 w-48 h-48">
-                                <div class="text-center mb-3">
-                                    <p class="font-semibold text-gray-800">Scan QR Code di atas untuk melakukan pembayaran</p>
-                                    <p class="text-sm text-gray-600 mt-2">Nominal: <span class="font-medium">Rp ${selectedOption.price.toLocaleString()}</span></p>
-                                </div>
-                                <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-lg w-full text-sm text-gray-700">
-                                    <p class="font-medium mb-2">Petunjuk Pembayaran:</p>
-                                    <ol class="list-decimal pl-5 space-y-1">
-                                        <li>Buka aplikasi e-wallet atau mobile banking Anda</li>
-                                        <li>Pilih menu Scan QR/QRIS</li>
-                                        <li>Arahkan kamera ke QR Code di atas</li>
-                                        <li>Periksa nominal pembayaran</li>
-                                        <li>Konfirmasi dan selesaikan pembayaran</li>
-                                        <li>Pembayaran akan otomatis terverifikasi</li>
-                                    </ol>
-                                    <p class="mt-3 text-xs">Jika dalam 5 menit pembayaran belum terverifikasi, silakan hubungi CS kami.</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" id="confirmPaymentBtn" class="w-full bg-pink-500 text-white py-3 rounded-lg font-medium">
-                            Saya Sudah Bayar
-                        </button>
-                    </form>
+    const selectedOption = durationOptions[selectedDurationIndex];
+    
+    const paymentPopupHTML = `
+        <div id="paymentPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div class="bg-white w-full max-w-md rounded-xl p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold">Pembayaran Canva Premium</h3>
+                    <button id="closePaymentBtn" class="text-gray-500">
+                        <i class="ri-close-line text-xl"></i>
+                    </button>
                 </div>
+                
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                    <p class="text-sm text-gray-700">
+                        <strong>Perhatian:</strong> Nomor WhatsApp dan Email wajib diisi untuk proses aktivasi akun Premium
+                    </p>
+                </div>
+                
+                <form id="paymentForm" class="space-y-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Nomor WhatsApp <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="whatsappInput" 
+                            required 
+                            placeholder="Contoh: 628123456789" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                        >
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Email <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="emailInput" 
+                            required 
+                            placeholder="Contoh: email@domain.com" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                        >
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Total Pembayaran</span>
+                            <span class="font-semibold text-pink-500">
+                                Rp ${selectedOption.price.toLocaleString()}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="border rounded-lg p-4 text-center">
+                        <h4 class="font-medium mb-3">Scan QRIS untuk Pembayaran</h4>
+                        <img 
+                            src="https://tmpfiles.org/dl/22936558/1742827158717ueeapnyfow.png" 
+                            alt="QRIS Code" 
+                            class="w-48 h-48 mx-auto mb-3"
+                        >
+                        <p class="text-sm text-gray-600">
+                            Silakan scan QR Code untuk menyelesaikan pembayaran
+                        </p>
+                    </div>
+                    
+                    <button 
+                        type="submit" 
+                        class="w-full bg-pink-500 text-white py-3 rounded-lg font-medium hover:bg-pink-600 transition-colors"
+                    >
+                        Konfirmasi Pembayaran
+                    </button>
+                </form>
             </div>
-        `;
+        </div>
+    `;
+    
+    // Tambahkan popup ke body
+    const popupContainer = document.createElement('div');
+    popupContainer.innerHTML = paymentPopupHTML;
+    document.body.appendChild(popupContainer.firstElementChild);
+    
+    // Tambahkan event listener untuk form
+    const paymentForm = document.getElementById('paymentForm');
+    const closeButton = document.getElementById('closePaymentBtn');
+    
+    paymentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const whatsapp = document.getElementById('whatsappInput').value;
+        const email = document.getElementById('emailInput').value;
+        
+        // Validasi sederhana
+        if (whatsapp && email) {
+            // Sembunyikan popup
+            document.getElementById('paymentPopup').remove();
+            
+            // Tampilkan pesan sukses
+            showSuccessMessage();
+        }
+    });
+    
+    // Tutup popup
+    closeButton.addEventListener('click', () => {
+        document.getElementById('paymentPopup').remove();
+    });
+}
+
+// Fungsi untuk menampilkan pesan sukses
+function showSuccessMessage() {
+    const successHTML = `
+        <div id="successPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+            <div class="bg-white w-full max-w-md rounded-xl p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                        <i class="ri-check-line text-3xl text-green-500"></i>
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Pembayaran Berhasil!</h3>
+                <p class="text-gray-600 mb-4">
+                    Akun Canva Premium akan segera diaktifkan. 
+                    Cek WhatsApp dan Email untuk informasi lebih lanjut.
+                </p>
+                <button 
+                    id="closeSuccessBtn" 
+                    class="w-full bg-pink-500 text-white py-3 rounded-lg font-medium hover:bg-pink-600 transition-colors"
+                >
+                    Kembali ke Beranda
+                </button>
+            </div>
+        </div>
+    `;
+    
+    const successDiv = document.createElement('div');
+    successDiv.innerHTML = successHTML;
+    document.body.appendChild(successDiv.firstElementChild);
+    
+    document.getElementById('closeSuccessBtn').addEventListener('click', () => {
+        document.getElementById('successPopup').remove();
+        window.location.href = '/';
+    });
+}
+
+// Inisialisasi popup pembayaran dari tombol "Beli Sekarang"
+document.getElementById('buyNowButton').addEventListener('click', showPaymentPopup);
         
         const paymentDiv = document.createElement('div');
         paymentDiv.innerHTML = paymentHTML;
